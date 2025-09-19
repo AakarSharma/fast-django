@@ -26,7 +26,9 @@ jobs:
           python -m pip install --upgrade pip
           pip install -e '.[docs]'
       - name: Deploy
+        shell: bash
         run: |
+          source .venv/bin/activate
           mkdocs gh-deploy --force
 
 
