@@ -4,8 +4,8 @@
 
 **Django-like Developer Experience on ASGI with FastAPI, Tortoise ORM, Aerich, and FastAPI-Admin**
 
-[![PyPI version](https://badge.fury.io/py/fast-django.svg)](https://badge.fury.io/py/fast-django)
-[![Python Support](https://img.shields.io/pypi/pyversions/fast-django.svg)](https://pypi.org/project/fast-django/)
+[![PyPI version](https://badge.fury.io/py/fast-django-asgi.svg)](https://badge.fury.io/py/fast-django-asgi)
+[![Python Support](https://img.shields.io/pypi/pyversions/fast-django-asgi.svg)](https://pypi.org/project/fast-django-asgi/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Code style: ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 [![Tests](https://github.com/AakarSharma/fast-django/workflows/CI/badge.svg)](https://github.com/AakarSharma/fast-django/actions)
@@ -71,7 +71,7 @@ Visit `http://127.0.0.1:8000` to see your app and `http://127.0.0.1:8000/docs` f
 ### Local Documentation
 
 ```bash
-pip install "fast-django[docs]"
+pip install "fast-django-asgi[docs]"
 mkdocs serve
 ```
 
