@@ -1,4 +1,4 @@
-site_name: fast-django
+site_name: fast-django (ASGI)
 repo_url: https://github.com/AakarSharma/fast-django
 theme:
   name: material
