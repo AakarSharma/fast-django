@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: GitHub Discussions
+    url: https://github.com/AakarSharma/fast-django/discussions
+    about: Ask questions and discuss ideas with the community
+  - name: Documentation
+    url: https://aakarsharma.github.io/fast-django/
+    about: Check our comprehensive documentation
+  - name: Security
+    url: https://github.com/AakarSharma/fast-django/security/advisories/new
+    about: Report security vulnerabilities privately

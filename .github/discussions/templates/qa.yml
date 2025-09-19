@@ -1,0 +1,56 @@
+title: "[Q&A] "
+labels: ["question"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for your question! Please provide as much detail as possible to help us help you.
+        
+  - type: input
+    id: question
+    attributes:
+      label: What's your question?
+      description: Please describe your question clearly and concisely
+      placeholder: "How do I..."
+    validations:
+      required: true
+      
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context
+      description: Provide any additional context, code examples, or error messages
+      placeholder: "Include code examples, error messages, or any other relevant information"
+      
+  - type: dropdown
+    id: version
+    attributes:
+      label: fast-django version
+      description: What version of fast-django are you using?
+      options:
+        - "0.1.0"
+        - "0.0.1"
+        - "Other (please specify in additional context)"
+    validations:
+      required: true
+      
+  - type: dropdown
+    id: python-version
+    attributes:
+      label: Python version
+      description: What version of Python are you using?
+      options:
+        - "3.11"
+        - "3.12"
+        - "Other (please specify in additional context)"
+    validations:
+      required: true
+      
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Code of Conduct
+      description: By submitting this question, you agree to follow our Code of Conduct
+      options:
+        - label: I agree to follow the Code of Conduct
+          required: true

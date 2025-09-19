@@ -1,0 +1,31 @@
+# Categories for GitHub Discussions
+
+- name: General
+  description: General discussion about fast-django
+  emoji: 💬
+  color: 0E8A16
+
+- name: Q&A
+  description: Questions and answers about using fast-django
+  emoji: ❓
+  color: 0075CA
+
+- name: Ideas
+  description: Ideas and suggestions for fast-django
+  emoji: 💡
+  color: FFE066
+
+- name: Show and Tell
+  description: Show off your fast-django projects
+  emoji: 🎉
+  color: BF58F3
+
+- name: Help Wanted
+  description: Community help requests
+  emoji: 🤝
+  color: 008672
+
+- name: Announcements
+  description: Important announcements and updates
+  emoji: 📢
+  color: D73A4A

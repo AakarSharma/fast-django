@@ -1,0 +1,62 @@
+title: "[Show and Tell] "
+labels: ["showcase"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Share your fast-django projects with the community! We'd love to see what you've built.
+        
+  - type: input
+    id: project-name
+    attributes:
+      label: Project name
+      description: What's the name of your project?
+      placeholder: "My Awesome fast-django App"
+    validations:
+      required: true
+      
+  - type: textarea
+    id: description
+    attributes:
+      label: Project description
+      description: Tell us about your project
+      placeholder: "Describe what your project does, what features it has, and what makes it special"
+    validations:
+      required: true
+      
+  - type: input
+    id: live-url
+    attributes:
+      label: Live URL (optional)
+      description: If your project is deployed, share the URL
+      placeholder: "https://myapp.example.com"
+      
+  - type: input
+    id: github-url
+    attributes:
+      label: GitHub repository (optional)
+      description: If your project is open source, share the repository URL
+      placeholder: "https://github.com/username/myapp"
+      
+  - type: textarea
+    id: code-snippets
+    attributes:
+      label: Code snippets (optional)
+      description: Share interesting code snippets or configurations
+      placeholder: "```python\n# Your code here\n```"
+      
+  - type: textarea
+    id: challenges
+    attributes:
+      label: Challenges and solutions
+      description: What challenges did you face and how did you solve them?
+      placeholder: "Describe any interesting problems you solved or lessons learned"
+      
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Code of Conduct
+      description: By submitting this showcase, you agree to follow our Code of Conduct
+      options:
+        - label: I agree to follow the Code of Conduct
+          required: true

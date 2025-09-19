@@ -1,0 +1,23 @@
+# Global owners
+* @AakarSharma
+
+# Documentation
+/docs/ @AakarSharma
+*.md @AakarSharma
+
+# Core source code
+/src/fast_django/ @AakarSharma
+
+# Tests
+/tests/ @AakarSharma
+
+# Configuration files
+pyproject.toml @AakarSharma
+.pre-commit-config.yaml @AakarSharma
+mkdocs.yml @AakarSharma
+
+# GitHub workflows
+/.github/workflows/ @AakarSharma
+
+# Examples
+/examples/ @AakarSharma
