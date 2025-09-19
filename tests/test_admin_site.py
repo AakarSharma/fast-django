@@ -6,8 +6,8 @@ from typing import Any
 from fastapi import FastAPI
 
 from fast_django.admin import AdminSite
-from fast_django.settings import Settings
 from fast_django.orm import Model, fields
+from fast_django.settings import Settings
 
 
 def test_admin_site_mount_success() -> None:

@@ -7,12 +7,11 @@ from typer.testing import CliRunner
 
 from fast_django.cli.main import app
 
-
 runner = CliRunner()
 
 
 def test_startproject_tmp(tmp_path: Path) -> None:
-    cwd = Path.cwd()
+    # Note: keep tmp dir isolated; no need to capture cwd
     try:
         # run inside tmp
         os_cwd = tmp_path

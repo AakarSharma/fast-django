@@ -1,12 +1,11 @@
 from __future__ import annotations
 
+import os
 from pathlib import Path
 
 from typer.testing import CliRunner
-import os
 
 from fast_django.cli.main import app
-
 
 runner = CliRunner()
 

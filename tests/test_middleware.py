@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import anyio
 import httpx
-from fastapi.middleware.gzip import GZipMiddleware
 
 from fast_django import Settings, create_app
 
@@ -17,7 +16,7 @@ async def _request_with_gzip() -> None:
     transport = httpx.ASGITransport(app=app)
     async with httpx.AsyncClient(transport=transport, base_url="http://test") as client:
         resp = await client.get("/ping")
-        assert resp.status_code == 200
+        assert resp.status_code == httpx.codes.OK
 
 
 def test_middleware_add() -> None:

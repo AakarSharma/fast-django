@@ -26,7 +26,7 @@ def test_try_call_admin_hooks_calls_hook(monkeypatch: Any) -> None:
     def _hook(app: FastAPI, settings: Settings) -> None:
         called["x"] = True
 
-    setattr(mod, "init_admin", _hook)
+    mod.init_admin = _hook  # type: ignore[attr-defined]
     # register module
     monkeypatch.setitem(__import__("sys").modules, "dummyapp.admin", mod)
     s = Settings()

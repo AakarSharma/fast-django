@@ -4,11 +4,9 @@ import os
 from pathlib import Path
 from typing import Any
 
-import pytest
 from typer.testing import CliRunner
 
 from fast_django.cli.main import app
-
 
 runner = CliRunner()
 

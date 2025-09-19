@@ -2,11 +2,11 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from fast_django.orm import Model, fields
-from fast_django.routers import APIRouter, FastAPI
 from typer.testing import CliRunner
 
 from fast_django.cli.main import app as cli
+from fast_django.orm import Model, fields
+from fast_django.routers import APIRouter, FastAPI
 
 
 def test_reexports() -> None:

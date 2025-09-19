@@ -1,18 +1,20 @@
 from __future__ import annotations
 
 import asyncio
+import importlib
 import os
+import sys
+import types
 from pathlib import Path
 from typing import Any
 
-from typer.testing import CliRunner
-import sys
 from fastapi import FastAPI
+from typer.testing import CliRunner
 
 from fast_django.admin import try_call_admin_hooks
 from fast_django.apps import include_app_routers
 from fast_django.cli.main import app
-
+from fast_django.settings import Settings
 
 runner = CliRunner()
 
@@ -43,9 +45,6 @@ def test_runserver_reload_false(tmp_path: Path) -> None:
 
 
 def test_try_call_admin_hooks_swallow_exceptions(monkeypatch: Any) -> None:
-    import types
-    from fast_django import settings as _
-
     called: dict[str, bool] = {"x": False}
     mod = types.ModuleType("boom.admin")
 
@@ -53,9 +52,8 @@ def test_try_call_admin_hooks_swallow_exceptions(monkeypatch: Any) -> None:
         called["x"] = True
         raise RuntimeError("boom")
 
-    setattr(mod, "init_admin", _hook)
+    mod.init_admin = _hook  # type: ignore[attr-defined]
     monkeypatch.setitem(__import__("sys").modules, "boom.admin", mod)
-    from fast_django.settings import Settings
     settings = Settings()
     settings.installed_apps = ["boom"]
     app_fast = FastAPI()
@@ -137,9 +135,8 @@ class User:
         res = runner.invoke(app, [
             "createsuperuser", "--email", "a@example.com", "--password", "pass", "--models", "myproj.models",
         ])  # type: ignore[list-item]
-        assert res.exit_code == 0 or res.exit_code == 1
+        assert res.exit_code in (0, 1)
         # ensure our fake model recorded creation
-        import importlib
         mod = importlib.import_module("myproj.models")
         assert mod.User.created and mod.User.created[0]["email"] == "a@example.com"
 
