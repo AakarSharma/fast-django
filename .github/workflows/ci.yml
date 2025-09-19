@@ -14,16 +14,16 @@ jobs:
       - uses: actions/setup-python@v6
         with:
           python-version: '3.11'
-      - name: Install dependencies
+      - name: Install, Lint and Test (venv)
+        shell: bash
         run: |
+          set -euo pipefail
+          python -m venv .venv
+          source .venv/bin/activate
           python -m pip install --upgrade pip
-          pip install -e .[dev,test]
-      - name: Lint
-        run: |
+          pip install -e '.[dev,test]'
           ruff check .
           mypy src
-      - name: Test
-        run: |
           pytest -q --maxfail=1 --disable-warnings
 
 
