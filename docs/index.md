@@ -7,7 +7,7 @@ fast-django brings the familiar Django development experience to modern ASGI app
 ## Quick Start
 
 ```bash
-pip install fast-django
+pip install fast-django-asgi
 fast-django startproject mysite
 cd mysite
 python manage.py runserver

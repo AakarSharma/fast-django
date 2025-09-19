@@ -7,7 +7,7 @@ This guide will walk you through setting up your first fast-django project and u
 Install fast-django using pip:
 
 ```bash
-pip install fast-django
+pip install fast-django-asgi
 ```
 
 For development with documentation support:
