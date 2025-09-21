@@ -612,7 +612,9 @@ async def websocket_endpoint(websocket: WebSocket, room_id: int):
 
 ## Next Steps
 
-- Explore the [API Reference](api-reference.md) for detailed documentation
-- Check out [Deployment Guide](deployment.md) for production setup
-- Learn about [Testing](testing.md) your fast-django applications
-- See [Performance Tips](performance.md) for optimization
+- Explore the API Reference:
+  - [Core API](api/core.md)
+  - [ORM API](api/orm.md)
+  - [CLI API](api/cli.md)
+- Read about [Migrations](migrations.md) and [Settings](settings.md)
+- Review [Middleware](middleware.md) and [Routing](routing.md)

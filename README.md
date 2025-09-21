@@ -144,6 +144,17 @@ pip install -e ".[dev,test,docs]"
 pre-commit install
 ```
 
+### Pre-commit
+
+We use pre-commit to run Ruff and MyPy before each commit.
+
+```bash
+pip install pre-commit
+pre-commit install
+# Run on all files
+pre-commit run --all-files
+```
+
 ### Running Tests
 
 ```bash
