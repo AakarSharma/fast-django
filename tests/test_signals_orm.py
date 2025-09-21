@@ -68,5 +68,3 @@ async def _exercise_orm() -> None:
 
 def test_orm_signals() -> None:
     anyio.run(_exercise_orm)
-
-

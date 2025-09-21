@@ -5,7 +5,7 @@ body:
     attributes:
       value: |
         Thanks for your question! Please provide as much detail as possible to help us help you.
-        
+
   - type: input
     id: question
     attributes:
@@ -14,14 +14,14 @@ body:
       placeholder: "How do I..."
     validations:
       required: true
-      
+
   - type: textarea
     id: context
     attributes:
       label: Additional context
       description: Provide any additional context, code examples, or error messages
       placeholder: "Include code examples, error messages, or any other relevant information"
-      
+
   - type: dropdown
     id: version
     attributes:
@@ -33,7 +33,7 @@ body:
         - "Other (please specify in additional context)"
     validations:
       required: true
-      
+
   - type: dropdown
     id: python-version
     attributes:
@@ -45,7 +45,7 @@ body:
         - "Other (please specify in additional context)"
     validations:
       required: true
-      
+
   - type: checkboxes
     id: terms
     attributes:

@@ -110,6 +110,7 @@ class User:
             @staticmethod
             async def init(config: dict[str, Any]) -> None:
                 return None
+
             @staticmethod
             async def close_connections() -> None:
                 return None
@@ -117,6 +118,7 @@ class User:
         class DummyCrypt:
             def __init__(self, *args: Any, **kwargs: Any) -> None:
                 pass
+
             def hash(self, pw: str) -> str:
                 return "hashed-" + pw
 
@@ -132,9 +134,18 @@ class User:
         monkeypatch.setattr("fast_django.cli.main.DoesNotExist", DummyDoesNotExist)
 
         sys.path.insert(0, str(Path.cwd()))
-        res = runner.invoke(app, [
-            "createsuperuser", "--email", "a@example.com", "--password", "pass", "--models", "myproj.models",
-        ])  # type: ignore[list-item]
+        res = runner.invoke(
+            app,
+            [
+                "createsuperuser",
+                "--email",
+                "a@example.com",
+                "--password",
+                "pass",
+                "--models",
+                "myproj.models",
+            ],
+        )  # type: ignore[list-item]
         assert res.exit_code in (0, 1)
         # ensure our fake model recorded creation
         mod = importlib.import_module("myproj.models")
@@ -159,6 +170,7 @@ class User:
             @staticmethod
             async def init(config: dict[str, Any]) -> None:
                 return None
+
             @staticmethod
             async def close_connections() -> None:
                 return None
@@ -170,9 +182,16 @@ class User:
         monkeypatch.setattr("tortoise.run_async", run_sync)
         # No need to patch CryptContext as we won't hit create branch
         sys.path.insert(0, str(Path.cwd()))
-        res = runner.invoke(app, [
-            "createsuperuser", "--email", "a@example.com", "--password", "pass", "--models", "myproj.models",
-        ])  # type: ignore[list-item]
+        res = runner.invoke(
+            app,
+            [
+                "createsuperuser",
+                "--email",
+                "a@example.com",
+                "--password",
+                "pass",
+                "--models",
+                "myproj.models",
+            ],
+        )  # type: ignore[list-item]
         assert res.exit_code == 0
-
-

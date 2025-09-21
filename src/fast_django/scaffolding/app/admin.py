@@ -9,5 +9,3 @@ from fast_django.settings import Settings
 def init_admin(app: FastAPI, settings: Settings) -> None:
     site = AdminSite(title="Admin")
     site.mount(app, settings)
-
-

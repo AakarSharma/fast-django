@@ -22,7 +22,9 @@ def test_end_to_end_project_flow(tmp_path: Path) -> None:
     assert (project_dir / "blog" / "migrations" / "__init__.py").exists()
 
     # 3) makemigrations (scoped to app)
-    res = subprocess.run(["python", "manage.py", "makemigrations", "--app", "blog"], cwd=project_dir, check=False)
+    res = subprocess.run(
+        ["python", "manage.py", "makemigrations", "--app", "blog"], cwd=project_dir, check=False
+    )
     assert res.returncode == 0
 
     # 4) migrate
@@ -31,7 +33,7 @@ def test_end_to_end_project_flow(tmp_path: Path) -> None:
 
     # 5) runserver (test mode so it doesn't block)
     env["FD_TEST_MODE"] = "1"
-    res = subprocess.run(["python", "manage.py", "runserver"], cwd=project_dir, env=env, check=False)
+    res = subprocess.run(
+        ["python", "manage.py", "runserver"], cwd=project_dir, env=env, check=False
+    )
     assert res.returncode == 0
-
-

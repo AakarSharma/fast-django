@@ -246,7 +246,7 @@ def startproject_custom(name: str) -> None:
     # Use custom template directory
     template = Path(__file__).parent.parent / "custom_scaffolding" / "project"
     copy_tree(template, base)
-    
+
     # Replace placeholders
     pattern = re.compile(r"project_name")
     for path in base.rglob("*.py"):
@@ -266,7 +266,7 @@ def startapp_custom(name: str) -> None:
     if base.exists():
         typer.echo(f"App {name} already exists", err=True)
         raise typer.Exit(1)
-    
+
     # Use custom app template
     template = Path(__file__).parent.parent / "custom_scaffolding" / "app"
     copy_tree(template, base)

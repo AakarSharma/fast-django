@@ -19,5 +19,3 @@ def test_runserver_infer_module(tmp_path: Path) -> None:
         res = runner.invoke(app, ["runserver", "--port", "9999", "--host", "127.0.0.1"])  # type: ignore[list-item]
         # Since uvicorn won't start here, command should still return 0 (we don't check)
         assert res.exit_code == 0
-
-

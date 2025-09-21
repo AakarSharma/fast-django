@@ -23,4 +23,3 @@ def init_admin(app: FastAPI, settings: Settings) -> None:
 ```
 
 Model registration will be added on top of AdminSite (resource mapping), keeping FastAPI-Admin and ORM internal.
-

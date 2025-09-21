@@ -8,5 +8,3 @@ router = APIRouter()
 @router.get("/")
 def index() -> dict[str, str]:
     return {"hello": "app"}
-
-

@@ -15,5 +15,3 @@ FD_TEST_MODE=1 python manage.py runserver --no-reload
 
 popd >/dev/null
 rm -rf "$TMP_DIR"
-
-

@@ -37,5 +37,3 @@ def init_db(app: FastAPI, settings: Settings) -> None:
     @app.on_event("shutdown")
     async def close_orm() -> None:
         await Tortoise.close_connections()
-
-

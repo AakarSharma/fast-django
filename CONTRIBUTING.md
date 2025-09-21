@@ -43,7 +43,7 @@ There are many ways to contribute to fast-django:
    ```bash
    # Install the package in development mode with all dependencies
    pip install -e ".[dev,test,docs]"
-   
+
    # Install pre-commit hooks
    pre-commit install
    ```

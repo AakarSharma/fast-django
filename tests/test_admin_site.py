@@ -34,5 +34,3 @@ def test_admin_site_register_model() -> None:
         id = fields.IntField(pk=True)
 
     AdminSite().register_model(M)
-
-

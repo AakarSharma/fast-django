@@ -88,5 +88,3 @@ def test_createsuperuser_no_user_model(tmp_path: Path) -> None:
         res = runner.invoke(app, ["createsuperuser", "--email", "a@example.com", "--password", "x"])  # type: ignore[list-item]
         assert res.exit_code != 0
         assert "No User model" in res.output
-
-

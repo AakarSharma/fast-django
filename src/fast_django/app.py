@@ -34,5 +34,3 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         try_call_admin_hooks(app, app_settings)
 
     return app
-
-

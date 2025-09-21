@@ -20,5 +20,3 @@ jobs:
       - name: Run smoke script
         run: |
           bash scripts/smoke.sh
-
-

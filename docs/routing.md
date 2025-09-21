@@ -213,7 +213,7 @@ from fastapi import HTTPException
 async def get_post(post_id: int):
     if post_id < 1:
         raise HTTPException(status_code=400, detail="Invalid post ID")
-    
+
     # Your logic here
     return {"post_id": post_id}
 ```

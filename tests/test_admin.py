@@ -34,5 +34,3 @@ def test_try_call_admin_hooks_calls_hook(monkeypatch: Any) -> None:
     app = FastAPI()
     try_call_admin_hooks(app, s)
     assert called["x"] is True
-
-

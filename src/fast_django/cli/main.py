@@ -110,7 +110,9 @@ def runserver(host: str = "127.0.0.1", port: int = 8000, reload: bool = True) ->
 
 @app.command()
 def makemigrations(
-    app: str | None = typer.Option(None, "--app", "--app-name", help="Limit migrations to given app directory"),
+    app: str | None = typer.Option(
+        None, "--app", "--app-name", help="Limit migrations to given app directory"
+    ),
 ) -> None:
     # Ensure we're in a generated project directory
     if not (Path("manage.py").exists() or Path("pyproject.toml").exists()):
@@ -151,7 +153,9 @@ def shell() -> None:
 def createsuperuser(
     email: str = typer.Option(...),
     password: str = typer.Option(..., prompt=True, hide_input=True),
-    models: str | None = typer.Option(None, help="Dotted path to app models module (e.g. myapp.models)"),
+    models: str | None = typer.Option(
+        None, help="Dotted path to app models module (e.g. myapp.models)"
+    ),
 ) -> None:
     """Create a superuser in the default models module if present."""
     # import models from current project if available
@@ -180,22 +184,31 @@ def createsuperuser(
         typer.echo("No User model found in current project.", err=True)
         raise typer.Exit(1)
 
-    from tortoise import Tortoise, run_async  # noqa: PLC0415
+    from tortoise import Tortoise, run_async
 
     models_module = env_models or (f"{candidate_name}.models" if candidate_name else None)
 
     async def _create() -> None:
         try:
-            await Tortoise.init(config={
-                "connections": {"default": "sqlite://db.sqlite3"},
-                "apps": {"models": {"models": [models_module or "app.models", "aerich.models"], "default_connection": "default"}},
-            })
+            await Tortoise.init(
+                config={
+                    "connections": {"default": "sqlite://db.sqlite3"},
+                    "apps": {
+                        "models": {
+                            "models": [models_module or "app.models", "aerich.models"],
+                            "default_connection": "default",
+                        }
+                    },
+                }
+            )
             pwd = CryptContext(schemes=["bcrypt"], deprecated="auto").hash(password)
             try:
                 await target_model.get(email=email)
                 typer.echo("User already exists", err=True)
             except DoesNotExist:
-                await target_model.create(email=email, is_active=True, password=pwd, is_superuser=True)
+                await target_model.create(
+                    email=email, is_active=True, password=pwd, is_superuser=True
+                )
                 typer.echo("Superuser created")
         except Exception as exc:  # pragma: no cover - surfaced via tests
             typer.echo(f"Error creating superuser: {exc}", err=True)
@@ -204,5 +217,3 @@ def createsuperuser(
                 await Tortoise.close_connections()
 
     run_async(_create())
-
-

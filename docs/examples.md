@@ -65,7 +65,7 @@ class Post(Model):
     created_at = fields.DatetimeField(auto_now_add=True)
     updated_at = fields.DatetimeField(auto_now=True)
     published_at = fields.DatetimeField(null=True)
-    
+
     # Relationships
     category = fields.ForeignKeyField('models.Category', related_name='posts')
     tags = fields.ManyToManyField('models.Tag', related_name='posts')
@@ -139,8 +139,8 @@ async def list_categories():
 @router.post("/categories")
 async def create_category(name: str, slug: str, description: str = None):
     category = await Category.create(
-        name=name, 
-        slug=slug, 
+        name=name,
+        slug=slug,
         description=description
     )
     return {"id": category.id, "name": category.name}
@@ -166,16 +166,16 @@ async def list_posts(
     featured: Optional[bool] = None
 ):
     query = Post.all()
-    
+
     if published is not None:
         query = query.filter(published=published)
     if category_id is not None:
         query = query.filter(category_id=category_id)
     if featured is not None:
         query = query.filter(featured=featured)
-    
+
     posts = await query.offset(skip).limit(limit).prefetch_related('category', 'tags')
-    
+
     return [
         PostResponse(
             id=post.id,
@@ -218,13 +218,13 @@ async def get_post(post_id: int):
 async def create_post(post: PostCreate):
     # Create slug from title
     slug = post.title.lower().replace(" ", "-").replace("_", "-")
-    
+
     # Get category
     try:
         category = await Category.get(id=post.category_id)
     except DoesNotExist:
         raise HTTPException(status_code=400, detail="Category not found")
-    
+
     # Create post
     db_post = await Post.create(
         title=post.title,
@@ -236,12 +236,12 @@ async def create_post(post: PostCreate):
         category=category,
         published_at=datetime.now() if post.published else None
     )
-    
+
     # Add tags
     if post.tag_ids:
         tags = await Tag.filter(id__in=post.tag_ids)
         await db_post.tags.add(*tags)
-    
+
     return PostResponse.from_orm(db_post)
 
 @router.put("/posts/{post_id}", response_model=PostResponse)
@@ -250,7 +250,7 @@ async def update_post(post_id: int, post: PostUpdate):
         db_post = await Post.get(id=post_id)
     except DoesNotExist:
         raise HTTPException(status_code=404, detail="Post not found")
-    
+
     # Update fields
     update_data = post.dict(exclude_unset=True)
     if 'category_id' in update_data:
@@ -260,19 +260,19 @@ async def update_post(post_id: int, post: PostUpdate):
             del update_data['category_id']
         except DoesNotExist:
             raise HTTPException(status_code=400, detail="Category not found")
-    
+
     for field, value in update_data.items():
         if field != 'tag_ids':
             setattr(db_post, field, value)
-    
+
     await db_post.save()
-    
+
     # Update tags
     if 'tag_ids' in update_data:
         tags = await Tag.filter(id__in=update_data['tag_ids'])
         await db_post.tags.clear()
         await db_post.tags.add(*tags)
-    
+
     return PostResponse.from_orm(db_post)
 
 @router.delete("/posts/{post_id}")
@@ -291,11 +291,11 @@ async def list_comments(post_id: int, approved_only: bool = True):
         post = await Post.get(id=post_id)
     except DoesNotExist:
         raise HTTPException(status_code=404, detail="Post not found")
-    
+
     query = Comment.filter(post=post)
     if approved_only:
         query = query.filter(approved=True)
-    
+
     comments = await query.order_by('-created_at')
     return [{"id": c.id, "author_name": c.author_name, "content": c.content, "created_at": c.created_at} for c in comments]
 
@@ -305,14 +305,14 @@ async def create_comment(post_id: int, author_name: str, author_email: str, cont
         post = await Post.get(id=post_id)
     except DoesNotExist:
         raise HTTPException(status_code=404, detail="Post not found")
-    
+
     comment = await Comment.create(
         post=post,
         author_name=author_name,
         author_email=author_email,
         content=content
     )
-    
+
     return {"id": comment.id, "message": "Comment created successfully"}
 ```
 
@@ -328,7 +328,7 @@ from fast_django.settings import Settings
 def init_admin(app: FastAPI, settings: Settings) -> None:
     site = AdminSite(title="Blog Admin")
     site.mount(app, settings)
-    
+
     # Register models when model registration is implemented
     # site.register_model(Post)
     # site.register_model(Category)
@@ -375,10 +375,10 @@ class User(Model):
     is_active = fields.BooleanField(default=True)
     is_staff = fields.BooleanField(default=False)
     created_at = fields.DatetimeField(auto_now_add=True)
-    
+
     def set_password(self, password: str):
         self.password_hash = pwd_context.hash(password)
-    
+
     def check_password(self, password: str) -> bool:
         return pwd_context.verify(password, self.password_hash)
 
@@ -401,7 +401,7 @@ class Product(Model):
     active = fields.BooleanField(default=True)
     created_at = fields.DatetimeField(auto_now_add=True)
     updated_at = fields.DatetimeField(auto_now=True)
-    
+
     category = fields.ForeignKeyField('models.Category', related_name='products')
     tags = fields.ManyToManyField('models.Tag', related_name='products')
 
@@ -412,7 +412,7 @@ class Order(Model):
     total_amount = fields.DecimalField(max_digits=10, decimal_places=2)
     created_at = fields.DatetimeField(auto_now_add=True)
     updated_at = fields.DatetimeField(auto_now=True)
-    
+
     items = fields.ManyToManyField('models.OrderItem', related_name='order')
 
 class OrderItem(Model):
@@ -457,7 +457,7 @@ async def list_products(
     search: Optional[str] = None
 ):
     query = Product.filter(active=True)
-    
+
     if category_id:
         query = query.filter(category_id=category_id)
     if min_price is not None:
@@ -466,9 +466,9 @@ async def list_products(
         query = query.filter(price__lte=max_price)
     if search:
         query = query.filter(name__icontains=search)
-    
+
     products = await query.offset(skip).limit(limit).prefetch_related('category', 'tags')
-    
+
     return [
         ProductResponse(
             id=p.id,
@@ -511,7 +511,7 @@ class ChatRoom(Model):
     created_by = fields.ForeignKeyField('models.User', related_name='created_rooms')
     created_at = fields.DatetimeField(auto_now_add=True)
     is_private = fields.BooleanField(default=False)
-    
+
     members = fields.ManyToManyField('models.User', related_name='chat_rooms')
 
 class Message(Model):
@@ -573,7 +573,7 @@ async def websocket_endpoint(websocket: WebSocket, room_id: int):
         while True:
             data = await websocket.receive_text()
             message_data = json.loads(data)
-            
+
             # Save message to database
             message = await Message.create(
                 room_id=room_id,
@@ -581,7 +581,7 @@ async def websocket_endpoint(websocket: WebSocket, room_id: int):
                 content=message_data['content'],
                 message_type=message_data.get('type', 'text')
             )
-            
+
             # Broadcast to room
             await manager.broadcast_to_room(
                 json.dumps({

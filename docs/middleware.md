@@ -12,4 +12,3 @@ class My(Settings):
         "fastapi.middleware.gzip.GZipMiddleware",
     ]
 ```
-

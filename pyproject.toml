@@ -104,5 +104,3 @@ ignore_missing_imports = true
 minversion = "8.0"
 addopts = "-q --cov=src/fast_django --cov-report=term-missing --cov-fail-under=90"
 testpaths = ["tests"]
-
-

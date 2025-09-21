@@ -294,10 +294,10 @@ async def main():
         db_url="sqlite://db.sqlite3",
         modules={"models": ["myapp.models"]}
     )
-    
+
     # Your database operations here
     users = await User.all()
-    
+
     await Tortoise.close_connections()
 
 # Run the async function
@@ -313,7 +313,7 @@ class PostManager:
     @staticmethod
     async def published():
         return await Post.filter(is_published=True)
-    
+
     @staticmethod
     async def recent(limit=10):
         return await Post.all().order_by('-created_at').limit(limit)
@@ -323,7 +323,7 @@ class Post(Model):
     title = fields.CharField(max_length=200)
     is_published = fields.BooleanField(default=False)
     created_at = fields.DatetimeField(auto_now_add=True)
-    
+
     objects = PostManager()
 ```
 
@@ -334,11 +334,11 @@ class User(Model):
     id = fields.IntField(pk=True)
     first_name = fields.CharField(max_length=50)
     last_name = fields.CharField(max_length=50)
-    
+
     @property
     def full_name(self):
         return f"{self.first_name} {self.last_name}"
-    
+
     async def get_posts(self):
         return await Post.filter(author=self)
 ```

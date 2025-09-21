@@ -5,5 +5,3 @@ __all__ = [
     "Settings",
     "create_app",
 ]
-
-

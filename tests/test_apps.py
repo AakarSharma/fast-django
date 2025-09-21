@@ -9,5 +9,3 @@ def test_include_app_routers_imports_template() -> None:
     app = FastAPI()
     include_app_routers(app, ["fast_django.scaffolding.project.project_name"])
     assert any(getattr(r, "path", "") == "/healthz" for r in app.routes)
-
-

@@ -19,5 +19,3 @@ async def _request_healthz() -> None:
 
 def test_app_healthz_route() -> None:
     anyio.run(_request_healthz)
-
-

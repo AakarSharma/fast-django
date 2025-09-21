@@ -1,4 +1,4 @@
-site_name: fast-django (ASGI) 
+site_name: fast-django (ASGI)
 repo_url: https://github.com/AakarSharma/fast-django
 theme:
   name: material
@@ -54,5 +54,3 @@ plugins:
             show_root_heading: true
             show_root_toc_entry: true
             heading_level: 2
-
-

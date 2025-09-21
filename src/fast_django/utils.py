@@ -11,5 +11,3 @@ def discover_models_modules(start_dir: Path | None = None) -> list[str]:
             modules.append(f"{entry.name}.models")
     modules.append("aerich.models")
     return modules
-
-

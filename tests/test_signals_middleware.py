@@ -19,10 +19,13 @@ def test_non_http_passthrough() -> None:
 
     async def run() -> None:
         scope = {"type": "websocket"}
+
         async def dummy_recv():
             return {}
+
         async def dummy_send(message):
             return None
+
         await mw(scope, dummy_recv, dummy_send)
 
     anyio.run(run)
@@ -53,6 +56,7 @@ def test_finished_receiver_exception_and_app_exception() -> None:
         raise RuntimeError("boom")
 
     transport = httpx.ASGITransport(app=app)
+
     async def run() -> None:
         async with httpx.AsyncClient(transport=transport, base_url="http://t") as client:
             resp = await client.get("/ok2")
@@ -67,5 +71,3 @@ def test_finished_receiver_exception_and_app_exception() -> None:
         # cleanup to avoid leaking receivers across tests
         request_finished.disconnect(r_finished)
         got_request_exception.disconnect(r_error)
-
-

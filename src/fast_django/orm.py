@@ -5,5 +5,3 @@ from tortoise import Tortoise, fields, run_async
 from tortoise.models import Model
 
 __all__ = ["Model", "Tortoise", "fields", "run_async"]
-
-

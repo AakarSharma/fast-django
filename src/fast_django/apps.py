@@ -16,5 +16,3 @@ def include_app_routers(app: FastAPI, app_names: list[str]) -> None:
             if isinstance(router, APIRouter):
                 app.include_router(router)
                 break
-
-

@@ -7,5 +7,3 @@ def test_settings_default() -> None:
     s = Settings()
     assert s.app_name
     assert s.tortoise.connections["default"].startswith("sqlite")
-
-

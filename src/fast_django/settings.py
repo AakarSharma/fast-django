@@ -14,7 +14,7 @@ class OrmConfig(BaseModel):
 
 
 class Settings(BaseSettings):
-    model_config = SettingsConfigDict(env_prefix="FD_", env_file=('.env',), case_sensitive=False)
+    model_config = SettingsConfigDict(env_prefix="FD_", env_file=(".env",), case_sensitive=False)
 
     app_name: str = "fast-django app"
     debug: bool = False
@@ -32,5 +32,3 @@ class Settings(BaseSettings):
     @property
     def tortoise(self) -> OrmConfig:  # pragma: no cover - compat shim
         return self.orm
-
-

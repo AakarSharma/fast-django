@@ -10,5 +10,3 @@ class User(Model):
     is_active = fields.BooleanField(default=True)
     is_superuser = fields.BooleanField(default=False)
     password = fields.CharField(max_length=255, null=True)
-
-

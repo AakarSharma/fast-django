@@ -63,10 +63,25 @@ class SignalsMiddleware:
     - request_finished when response starts
     """
 
-    def __init__(self, app: Callable[[MutableMapping[str, Any], Callable[[], Awaitable[MutableMapping[str, Any]]], Callable[[MutableMapping[str, Any]], Awaitable[None]]], Awaitable[None]]):
+    def __init__(
+        self,
+        app: Callable[
+            [
+                MutableMapping[str, Any],
+                Callable[[], Awaitable[MutableMapping[str, Any]]],
+                Callable[[MutableMapping[str, Any]], Awaitable[None]],
+            ],
+            Awaitable[None],
+        ],
+    ):
         self.app = app
 
-    async def __call__(self, scope: MutableMapping[str, Any], receive: Callable[[], Awaitable[MutableMapping[str, Any]]], send: Callable[[MutableMapping[str, Any]], Awaitable[None]]) -> None:
+    async def __call__(
+        self,
+        scope: MutableMapping[str, Any],
+        receive: Callable[[], Awaitable[MutableMapping[str, Any]]],
+        send: Callable[[MutableMapping[str, Any]], Awaitable[None]],
+    ) -> None:
         if scope.get("type") != "http":
             await self.app(scope, receive, send)
             return
@@ -150,5 +165,3 @@ __all__ = [
     "request_finished",
     "request_started",
 ]
-
-

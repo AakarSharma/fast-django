@@ -8,8 +8,10 @@ from fastapi import FastAPI
 try:
     from tortoise.models import Model
 except Exception:  # pragma: no cover - only if tortoise missing in env
+
     class Model:  # type: ignore
         pass
+
 
 from .settings import Settings
 
@@ -28,7 +30,7 @@ class AdminSite:
     def mount(self, app: FastAPI, settings: Settings, path: str | None = None) -> None:
         mount_path = path or settings.admin_path
         try:
-            from fastapi_admin.app import app as admin_app  # type: ignore  # noqa: PLC0415
+            from fastapi_admin.app import app as admin_app  # type: ignore
 
             app.mount(mount_path, admin_app)
             self._mounted = True
@@ -63,5 +65,3 @@ def try_call_admin_hooks(app: FastAPI, settings: Settings) -> None:
                 hook(app, settings)
             except Exception:
                 continue
-
-

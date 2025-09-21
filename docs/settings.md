@@ -34,16 +34,16 @@ app = create_app(settings)
 class Settings(Settings):
     # Application name
     app_name: str = "fast-django app"
-    
+
     # Debug mode
     debug: bool = False
-    
+
     # Secret key for security
     secret_key: str = "change-me"
-    
+
     # Base directory (defaults to current working directory)
     base_dir: Path = Field(default_factory=lambda: Path.cwd())
-    
+
     # Admin interface settings
     admin_enabled: bool = True
     admin_path: str = "/admin"
@@ -61,10 +61,10 @@ class Settings(Settings):
             "default": "sqlite://db.sqlite3",
             "readonly": "sqlite://readonly.db",
         },
-        
+
         # Model modules
         models=["myapp.models", "aerich.models"],
-        
+
         # App-specific configuration
         apps={
             "models": {
@@ -85,7 +85,7 @@ class Settings(Settings):
 class Settings(Settings):
     # Installed apps (for auto-discovery)
     installed_apps: list[str] = ["myapp", "blog", "users"]
-    
+
     # Middleware (dotted paths)
     middleware: list[str] = [
         "fastapi.middleware.cors.CORSMiddleware",
@@ -144,7 +144,7 @@ class ProductionSettings(Settings):
     app_name: str = "Production App"
     debug: bool = False
     secret_key: str = "production-secret-key"
-    
+
     # Production database
     orm: OrmConfig = OrmConfig(
         connections={
@@ -152,7 +152,7 @@ class ProductionSettings(Settings):
         },
         models=["myapp.models", "aerich.models"]
     )
-    
+
     # Production middleware
     middleware: List[str] = [
         "fastapi.middleware.cors.CORSMiddleware",
@@ -164,7 +164,7 @@ class DevelopmentSettings(Settings):
     app_name: str = "Development App"
     debug: bool = True
     secret_key: str = "dev-secret-key"
-    
+
     # Development database
     orm: OrmConfig = OrmConfig(
         connections={
@@ -177,7 +177,7 @@ class TestSettings(Settings):
     app_name: str = "Test App"
     debug: bool = True
     secret_key: str = "test-secret-key"
-    
+
     # Test database
     orm: OrmConfig = OrmConfig(
         connections={
@@ -195,7 +195,7 @@ from fast_django.settings import Settings, OrmConfig
 
 def get_settings():
     env = os.getenv("ENVIRONMENT", "development")
-    
+
     if env == "production":
         return ProductionSettings()
     elif env == "test":
@@ -218,17 +218,17 @@ from pathlib import Path
 class MySettings(Settings):
     # Custom list field
     allowed_hosts: List[str] = ["localhost", "127.0.0.1"]
-    
+
     # Custom dict field
     cache_config: Dict[str, Any] = {
         "backend": "redis",
         "host": "localhost",
         "port": 6379,
     }
-    
+
     # Custom path field
     static_files_dir: Path = Path("static")
-    
+
     # Custom validation
     def model_post_init(self, __context: Any) -> None:
         if self.debug and self.secret_key == "change-me":
@@ -292,13 +292,13 @@ class Settings(Settings):
     middleware: List[str] = [
         # CORS middleware
         "fastapi.middleware.cors.CORSMiddleware",
-        
+
         # GZip compression
         "fastapi.middleware.gzip.GZipMiddleware",
-        
+
         # Trusted host middleware
         "fastapi.middleware.trustedhost.TrustedHostMiddleware",
-        
+
         # HTTPS redirect (production)
         "fastapi.middleware.httpsredirect.HTTPSRedirectMiddleware",
     ]
@@ -321,7 +321,7 @@ class TimingMiddleware:
             return
 
         start_time = time.time()
-        
+
         async def send_wrapper(message):
             if message["type"] == "http.response.start":
                 process_time = time.time() - start_time
@@ -349,13 +349,13 @@ class Settings(Settings):
     app_name: str = "myapp"
     debug: bool = False
     secret_key: str = "change-me"
-    
+
     @validator('secret_key')
     def validate_secret_key(cls, v, values):
         if not values.get('debug') and v == "change-me":
             raise ValueError("Must set a secure secret key in production")
         return v
-    
+
     @validator('app_name')
     def validate_app_name(cls, v):
         if not v or len(v.strip()) == 0:

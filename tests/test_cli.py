@@ -23,5 +23,3 @@ def test_startproject_tmp(tmp_path: Path) -> None:
             assert (Path("mysite") / "mysite" / "asgi.py").exists()
     finally:
         shutil.rmtree(tmp_path, ignore_errors=True)
-
-

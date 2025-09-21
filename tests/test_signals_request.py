@@ -26,7 +26,6 @@ async def _exercise_routes() -> None:
     def ok() -> dict[str, str]:
         return {"ok": "1"}
 
-
     transport = httpx.ASGITransport(app=app)
     async with httpx.AsyncClient(transport=transport, base_url="http://test") as client:
         resp = await client.get("/ok")
@@ -43,5 +42,3 @@ async def _exercise_routes() -> None:
 
 def test_request_signals() -> None:
     anyio.run(_exercise_routes)
-
-

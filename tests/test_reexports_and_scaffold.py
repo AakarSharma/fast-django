@@ -27,5 +27,3 @@ def test_startapp_scaffold_files(tmp_path: Path) -> None:
         assert (Path("shop") / "views.py").exists()
         assert (Path("shop") / "routes.py").exists()
         assert (Path("shop") / "migrations" / "__init__.py").exists()
-
-

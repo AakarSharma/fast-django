@@ -43,5 +43,3 @@ def test_async_signal_async_receiver() -> None:
 
     anyio.run(run)
     assert seen == ["ok"]
-
-
