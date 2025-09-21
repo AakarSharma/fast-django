@@ -8,6 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Django-like signals system:
+  - Request lifecycle signals via built-in `SignalsMiddleware`
+  - ORM signals (`pre_save`, `post_save`, `pre_delete`, `post_delete`) by patching Tortoise `Model`
+- New docs page: Signals, added to navigation
+- Tests for request and ORM signals
+
+### Added
 - Comprehensive documentation with examples and API reference
 - Enhanced README with badges and clear project overview
 - Detailed contributing guidelines and code of conduct

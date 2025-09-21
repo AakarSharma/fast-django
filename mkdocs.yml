@@ -32,6 +32,7 @@ nav:
     - Settings: settings.md
     - Middleware: middleware.md
     - Admin: admin.md
+    - Signals: signals.md
   - Development:
     - CLI: cli.md
     - Scaffolding: scaffolding.md

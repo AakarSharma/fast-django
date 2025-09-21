@@ -29,6 +29,7 @@ fast-django brings the familiar Django development experience to modern ASGI app
 - 🔧 **Scaffolding** - Generate projects and apps with `startproject` and `startapp`
 - 🚀 **FastAPI-powered** - Built on FastAPI for high performance and automatic API docs
 - 🔄 **Aerich Migrations** - Database migrations with automatic discovery
+- 🔔 **Signals** - Django-like request and ORM signals
 
 ## 🚀 Quick Start
 
@@ -64,7 +65,7 @@ Visit `http://127.0.0.1:8000` to see your app and `http://127.0.0.1:8000/docs` f
 ## 📖 Documentation
 
 - **[Getting Started](https://aakarsharma.github.io/fast-django/getting-started/)** - Complete setup guide
-- **[Core Concepts](https://aakarsharma.github.io/fast-django/routing/)** - Routing, ORM, Settings, and more
+- **[Core Concepts](https://aakarsharma.github.io/fast-django/routing/)** - Routing, ORM, Settings, Middleware, Signals, and more
 - **[Examples](https://aakarsharma.github.io/fast-django/examples/)** - Real-world applications
 - **[API Reference](https://aakarsharma.github.io/fast-django/api/)** - Complete API documentation
 

@@ -30,6 +30,10 @@ settings = Settings(app_name="My App", debug=True)
 app = create_app(settings)
 ```
 
+### Built-ins
+
+`create_app` automatically adds `fast_django.signals.SignalsMiddleware` to emit request lifecycle signals. Custom middleware listed in `Settings.middleware` is applied after this built-in middleware.
+
 ## Settings
 
 ### `Settings`
