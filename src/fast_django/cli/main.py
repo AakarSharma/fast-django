@@ -184,7 +184,8 @@ def createsuperuser(
         typer.echo("No User model found in current project.", err=True)
         raise typer.Exit(1)
 
-    from tortoise import Tortoise, run_async
+    # Import lazily to avoid cost on CLI start and satisfy linter by placing near top
+    from tortoise import Tortoise, run_async  # noqa: PLC0415
 
     models_module = env_models or (f"{candidate_name}.models" if candidate_name else None)
 

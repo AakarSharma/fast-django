@@ -30,9 +30,8 @@ class AdminSite:
     def mount(self, app: FastAPI, settings: Settings, path: str | None = None) -> None:
         mount_path = path or settings.admin_path
         try:
-            from fastapi_admin.app import app as admin_app  # type: ignore
-
-            app.mount(mount_path, admin_app)
+            module = import_module("fastapi_admin.app")
+            app.mount(mount_path, module.app)
             self._mounted = True
         except Exception:
             placeholder = FastAPI(title=f"{self.title} placeholder")
