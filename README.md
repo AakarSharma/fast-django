@@ -8,8 +8,8 @@
 [![Python Support](https://img.shields.io/pypi/pyversions/fast-django-asgi.svg)](https://pypi.org/project/fast-django-asgi/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Code style: ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
-[![Tests](https://github.com/AakarSharma/fast-django/workflows/CI/badge.svg)](https://github.com/AakarSharma/fast-django/actions)
-[![Documentation Status](https://github.com/AakarSharma/fast-django/workflows/Docs/badge.svg)](https://aakarsharma.github.io/fast-django/)
+[![CI](https://github.com/AakarSharma/fast-django/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/AakarSharma/fast-django/actions/workflows/ci.yml)
+[![Docs](https://github.com/AakarSharma/fast-django/actions/workflows/docs.yml/badge.svg?branch=main)](https://github.com/AakarSharma/fast-django/actions/workflows/docs.yml)
 
 [Documentation](https://aakarsharma.github.io/fast-django/) • [Examples](https://aakarsharma.github.io/fast-django/examples/) • [API Reference](https://aakarsharma.github.io/fast-django/api/) • [Contributing](CONTRIBUTING.md)
 
