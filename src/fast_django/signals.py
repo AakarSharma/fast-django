@@ -3,7 +3,7 @@ from __future__ import annotations
 import inspect
 from collections.abc import Awaitable, Callable, Iterable, MutableMapping
 from contextlib import suppress
-from typing import Any
+from typing import Any, cast
 
 from tortoise.models import Model
 
@@ -129,10 +129,10 @@ def _patch_tortoise_model_methods() -> None:
         with suppress(Exception):
             await post_delete.send(sender=self.__class__, instance=self)
 
-    setattr(_fd_save, "__fast_django_patched__", True)
-    setattr(_fd_delete, "__fast_django_patched__", True)
-    setattr(Model, "save", _fd_save)
-    setattr(Model, "delete", _fd_delete)
+    cast(Any, _fd_save).__fast_django_patched__ = True
+    cast(Any, _fd_delete).__fast_django_patched__ = True
+    cast(Any, Model).save = _fd_save
+    cast(Any, Model).delete = _fd_delete
 
 
 # Apply the ORM patches eagerly so signals work even without FastAPI app
