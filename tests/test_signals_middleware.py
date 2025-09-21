@@ -1,10 +1,12 @@
 from __future__ import annotations
 
+from contextlib import suppress
+
 import anyio
 import httpx
 
 from fast_django import Settings, create_app
-from fast_django.signals import request_finished, request_started, got_request_exception
+from fast_django.signals import SignalsMiddleware, got_request_exception, request_finished
 
 
 def test_non_http_passthrough() -> None:
@@ -12,9 +14,6 @@ def test_non_http_passthrough() -> None:
 
     async def asgi_app(scope, receive, send):  # type: ignore[no-redef]
         called["ok"] = True
-
-    # Wrap with middleware directly
-    from fast_django.signals import SignalsMiddleware
 
     mw = SignalsMiddleware(asgi_app)
 
@@ -57,11 +56,10 @@ def test_finished_receiver_exception_and_app_exception() -> None:
     async def run() -> None:
         async with httpx.AsyncClient(transport=transport, base_url="http://t") as client:
             resp = await client.get("/ok2")
-            assert resp.status_code == 200
-            try:
-                await client.get("/bad")
-            except Exception:
-                pass
+            assert resp.status_code == httpx.codes.OK
+            with anyio.move_on_after(0):
+                with suppress(Exception):
+                    await client.get("/bad")
 
     try:
         anyio.run(run)

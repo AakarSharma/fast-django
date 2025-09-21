@@ -5,8 +5,8 @@ from fastapi import FastAPI
 from .admin import try_call_admin_hooks
 from .apps import include_app_routers
 from .db import init_db
-from .signals import SignalsMiddleware  # ensure signals module imports and middleware available
 from .settings import Settings
+from .signals import SignalsMiddleware  # ensure signals module imports and middleware available
 
 
 def create_app(settings: Settings | None = None) -> FastAPI:

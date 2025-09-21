@@ -4,8 +4,8 @@ import anyio
 
 from fast_django import Settings, create_app
 from fast_django.orm import Tortoise
-from fast_django.signals import post_delete, post_save, pre_delete, pre_save
 from fast_django.scaffolding.project.project_name.models import User
+from fast_django.signals import post_delete, post_save, pre_delete, pre_save
 
 
 async def _exercise_orm() -> None:

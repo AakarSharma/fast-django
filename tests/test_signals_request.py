@@ -30,13 +30,13 @@ async def _exercise_routes() -> None:
     transport = httpx.ASGITransport(app=app)
     async with httpx.AsyncClient(transport=transport, base_url="http://test") as client:
         resp = await client.get("/ok")
-        assert resp.status_code == 200
+        assert resp.status_code == httpx.codes.OK
         assert "started" in events and "finished" in events
 
         # Ensure no duplicate emissions across multiple requests
         events.clear()
         resp = await client.get("/ok")
-        assert resp.status_code == 200
+        assert resp.status_code == httpx.codes.OK
         # finished may be emitted on start or body depending on stack; just assert started appeared
         assert "started" in events
 
