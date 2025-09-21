@@ -1,9 +1,9 @@
 name: CI
 
 on:
-  pull_request:
-    branches: [ main ]
   push:
+    branches: [ main ]
+  pull_request:
     branches: [ main ]
 
 permissions:
@@ -34,34 +34,6 @@ jobs:
 
       - name: Run tests
         run: |
-          pytest -q
-
-name: CI
-
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v5
-      - uses: actions/setup-python@v6
-        with:
-          python-version: '3.11'
-      - name: Install, Lint and Test (venv)
-        shell: bash
-        run: |
-          set -euo pipefail
-          python -m venv .venv
-          source .venv/bin/activate
-          python -m pip install --upgrade pip
-          pip install -e '.[dev,test]'
-          ruff check .
-          mypy src
           pytest -q --maxfail=1 --disable-warnings
 
 
