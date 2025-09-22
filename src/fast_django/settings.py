@@ -9,7 +9,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 class OrmConfig(BaseModel):
     models: list[str] = Field(default_factory=lambda: ["aerich.models"])
-    connections: dict[str, str] = Field(default_factory=lambda: {"default": "sqlite://db.sqlite3"})
+    connections: dict[str, Any] = Field(default_factory=lambda: {"default": "sqlite://db.sqlite3"})
     apps: dict[str, dict[str, Any]] = Field(default_factory=dict)
 
 

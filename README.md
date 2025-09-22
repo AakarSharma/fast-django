@@ -203,6 +203,14 @@ We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) f
 - ✅ **Type Safety**: Full type hints and mypy compliance
 - 🔄 **Active Development**: Regular updates and improvements
 
+## 📈 Performance & Benchmarks
+
+fast-django delivers performance on par with raw FastAPI under identical I/O‑intensive workloads.
+
+![Throughput vs Concurrency](https://raw.githubusercontent.com/AakarSharma/fastapi-vs-django-benchmark/main/results/throughput_vs_concurrency.png)
+
+For the full methodology, additional plots, and reproducible runs, see the dedicated benchmark repository: [FastAPI vs Django WSGI vs Django ASGI Performance Benchmark](https://github.com/AakarSharma/fastapi-vs-django-benchmark).
+
 ## 🆘 Support
 
 - 📚 **Documentation**: [https://aakarsharma.github.io/fast-django/](https://aakarsharma.github.io/fast-django/)
