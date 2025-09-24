@@ -3,7 +3,7 @@ requires = ["hatchling>=1.25"]
 build-backend = "hatchling.build"
 
 [project]
-name = "fast-django-asgi"
+name = "fast-django"
 version = "0.1.3.post1"
 description = "Django-like developer experience on ASGI powered by FastAPI, Tortoise ORM, Aerich, and FastAPI-Admin."
 readme = "README.md"
