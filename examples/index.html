@@ -1,0 +1,1916 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../migrations/">
+      
+      
+        <link rel="next" href="../api/core/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.20">
+    
+    
+      
+        <title>Examples - fast-django (ASGI)</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.e53b48f4.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#examples" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="fast-django (ASGI)" class="md-header__button md-logo" aria-label="fast-django (ASGI)" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            fast-django (ASGI)
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Examples
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/AakarSharma/fast-django" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../getting-started/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Getting Started
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../routing/" class="md-tabs__link">
+          
+  
+  
+  Core Concepts
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../cli/" class="md-tabs__link">
+          
+  
+  
+  Development
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Examples
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../api/core/" class="md-tabs__link">
+          
+  
+  
+  API Reference
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="fast-django (ASGI)" class="md-nav__button md-logo" aria-label="fast-django (ASGI)" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    fast-django (ASGI)
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/AakarSharma/fast-django" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../getting-started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Getting Started
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Core Concepts
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Core Concepts
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../routing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Routing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../orm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ORM
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../settings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Settings
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../middleware/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Middleware
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../admin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Admin
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../signals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Signals
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Development
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Development
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cli/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CLI
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../scaffolding/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Scaffolding
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../migrations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Migrations
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Examples
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Examples
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#blog-application" class="md-nav__link">
+    <span class="md-ellipsis">
+      Blog Application
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Blog Application">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#project-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Project Setup
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#models" class="md-nav__link">
+    <span class="md-ellipsis">
+      Models
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#api-routes" class="md-nav__link">
+    <span class="md-ellipsis">
+      API Routes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#admin-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Admin Configuration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#database-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Database Setup
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#e-commerce-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      E-commerce API
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="E-commerce API">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#models_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Models
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#api-routes_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      API Routes
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#real-time-chat-application" class="md-nav__link">
+    <span class="md-ellipsis">
+      Real-time Chat Application
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Real-time Chat Application">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#models_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Models
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#websocket-routes" class="md-nav__link">
+    <span class="md-ellipsis">
+      WebSocket Routes
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#best-practices" class="md-nav__link">
+    <span class="md-ellipsis">
+      Best Practices
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#next-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      Next Steps
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    API Reference
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            API Reference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/core/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Core API
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/orm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ORM API
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/cli/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CLI API
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#blog-application" class="md-nav__link">
+    <span class="md-ellipsis">
+      Blog Application
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Blog Application">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#project-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Project Setup
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#models" class="md-nav__link">
+    <span class="md-ellipsis">
+      Models
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#api-routes" class="md-nav__link">
+    <span class="md-ellipsis">
+      API Routes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#admin-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Admin Configuration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#database-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Database Setup
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#e-commerce-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      E-commerce API
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="E-commerce API">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#models_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Models
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#api-routes_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      API Routes
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#real-time-chat-application" class="md-nav__link">
+    <span class="md-ellipsis">
+      Real-time Chat Application
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Real-time Chat Application">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#models_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Models
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#websocket-routes" class="md-nav__link">
+    <span class="md-ellipsis">
+      WebSocket Routes
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#best-practices" class="md-nav__link">
+    <span class="md-ellipsis">
+      Best Practices
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#next-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      Next Steps
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="examples">Examples</h1>
+<p>This section provides comprehensive examples of fast-django applications, from simple tutorials to complete production-ready applications.</p>
+<h2 id="blog-application">Blog Application</h2>
+<p>A complete blog application demonstrating models, routing, admin interface, and database operations.</p>
+<h3 id="project-setup">Project Setup</h3>
+<pre><code class="language-bash"># Create project
+fast-django startproject myblog
+cd myblog
+
+# Create blog app
+fast-django startapp blog
+</code></pre>
+<h3 id="configuration">Configuration</h3>
+<p>Update <code>myblog/settings.py</code>:</p>
+<pre><code class="language-python">from fast_django.settings import Settings, OrmConfig
+
+class Settings(Settings):
+    app_name: str = &quot;My Blog&quot;
+    debug: bool = True
+    orm: OrmConfig = OrmConfig(
+        models=[&quot;myblog.models&quot;, &quot;blog.models&quot;, &quot;aerich.models&quot;]
+    )
+    installed_apps: list[str] = [&quot;myblog&quot;, &quot;blog&quot;]
+</code></pre>
+<h3 id="models">Models</h3>
+<p>Define your blog models in <code>blog/models.py</code>:</p>
+<pre><code class="language-python">from fast_django.orm import Model, fields
+from datetime import datetime
+
+class Category(Model):
+    id = fields.IntField(pk=True)
+    name = fields.CharField(max_length=100, unique=True)
+    slug = fields.CharField(max_length=100, unique=True)
+    description = fields.TextField(null=True)
+    created_at = fields.DatetimeField(auto_now_add=True)
+
+class Tag(Model):
+    id = fields.IntField(pk=True)
+    name = fields.CharField(max_length=50, unique=True)
+    slug = fields.CharField(max_length=50, unique=True)
+    color = fields.CharField(max_length=7, default=&quot;#000000&quot;)  # Hex color
+
+class Post(Model):
+    id = fields.IntField(pk=True)
+    title = fields.CharField(max_length=200)
+    slug = fields.CharField(max_length=200, unique=True)
+    content = fields.TextField()
+    excerpt = fields.TextField(max_length=500, null=True)
+    published = fields.BooleanField(default=False)
+    featured = fields.BooleanField(default=False)
+    created_at = fields.DatetimeField(auto_now_add=True)
+    updated_at = fields.DatetimeField(auto_now=True)
+    published_at = fields.DatetimeField(null=True)
+
+    # Relationships
+    category = fields.ForeignKeyField('models.Category', related_name='posts')
+    tags = fields.ManyToManyField('models.Tag', related_name='posts')
+
+class Comment(Model):
+    id = fields.IntField(pk=True)
+    post = fields.ForeignKeyField('models.Post', related_name='comments')
+    author_name = fields.CharField(max_length=100)
+    author_email = fields.CharField(max_length=100)
+    content = fields.TextField()
+    approved = fields.BooleanField(default=False)
+    created_at = fields.DatetimeField(auto_now_add=True)
+</code></pre>
+<h3 id="api-routes">API Routes</h3>
+<p>Create comprehensive API routes in <code>blog/urls.py</code>:</p>
+<pre><code class="language-python">from fast_django.routers import APIRouter
+from fast_django.orm import DoesNotExist
+from fastapi import HTTPException, Query
+from typing import List, Optional
+from pydantic import BaseModel
+from datetime import datetime
+
+router = APIRouter(prefix=&quot;/api/blog&quot;, tags=[&quot;blog&quot;])
+
+# Pydantic models for request/response
+class PostCreate(BaseModel):
+    title: str
+    content: str
+    excerpt: Optional[str] = None
+    category_id: int
+    tag_ids: List[int] = []
+    published: bool = False
+    featured: bool = False
+
+class PostUpdate(BaseModel):
+    title: Optional[str] = None
+    content: Optional[str] = None
+    excerpt: Optional[str] = None
+    category_id: Optional[int] = None
+    tag_ids: Optional[List[int]] = None
+    published: Optional[bool] = None
+    featured: Optional[bool] = None
+
+class PostResponse(BaseModel):
+    id: int
+    title: str
+    slug: str
+    content: str
+    excerpt: Optional[str]
+    published: bool
+    featured: bool
+    created_at: datetime
+    updated_at: datetime
+    published_at: Optional[datetime]
+    category: dict
+    tags: List[dict]
+
+    class Config:
+        from_attributes = True
+
+# Category endpoints
+@router.get(&quot;/categories&quot;, response_model=List[dict])
+async def list_categories():
+    categories = await Category.all()
+    return [{&quot;id&quot;: c.id, &quot;name&quot;: c.name, &quot;slug&quot;: c.slug} for c in categories]
+
+@router.post(&quot;/categories&quot;)
+async def create_category(name: str, slug: str, description: str = None):
+    category = await Category.create(
+        name=name,
+        slug=slug,
+        description=description
+    )
+    return {&quot;id&quot;: category.id, &quot;name&quot;: category.name}
+
+# Tag endpoints
+@router.get(&quot;/tags&quot;, response_model=List[dict])
+async def list_tags():
+    tags = await Tag.all()
+    return [{&quot;id&quot;: t.id, &quot;name&quot;: t.name, &quot;slug&quot;: t.slug, &quot;color&quot;: t.color} for t in tags]
+
+@router.post(&quot;/tags&quot;)
+async def create_tag(name: str, slug: str, color: str = &quot;#000000&quot;):
+    tag = await Tag.create(name=name, slug=slug, color=color)
+    return {&quot;id&quot;: tag.id, &quot;name&quot;: tag.name}
+
+# Post endpoints
+@router.get(&quot;/posts&quot;, response_model=List[PostResponse])
+async def list_posts(
+    skip: int = Query(0, ge=0),
+    limit: int = Query(10, ge=1, le=100),
+    published: Optional[bool] = None,
+    category_id: Optional[int] = None,
+    featured: Optional[bool] = None
+):
+    query = Post.all()
+
+    if published is not None:
+        query = query.filter(published=published)
+    if category_id is not None:
+        query = query.filter(category_id=category_id)
+    if featured is not None:
+        query = query.filter(featured=featured)
+
+    posts = await query.offset(skip).limit(limit).prefetch_related('category', 'tags')
+
+    return [
+        PostResponse(
+            id=post.id,
+            title=post.title,
+            slug=post.slug,
+            content=post.content,
+            excerpt=post.excerpt,
+            published=post.published,
+            featured=post.featured,
+            created_at=post.created_at,
+            updated_at=post.updated_at,
+            published_at=post.published_at,
+            category={&quot;id&quot;: post.category.id, &quot;name&quot;: post.category.name},
+            tags=[{&quot;id&quot;: tag.id, &quot;name&quot;: tag.name} for tag in post.tags]
+        ) for post in posts
+    ]
+
+@router.get(&quot;/posts/{post_id}&quot;, response_model=PostResponse)
+async def get_post(post_id: int):
+    try:
+        post = await Post.get(id=post_id).prefetch_related('category', 'tags')
+        return PostResponse(
+            id=post.id,
+            title=post.title,
+            slug=post.slug,
+            content=post.content,
+            excerpt=post.excerpt,
+            published=post.published,
+            featured=post.featured,
+            created_at=post.created_at,
+            updated_at=post.updated_at,
+            published_at=post.published_at,
+            category={&quot;id&quot;: post.category.id, &quot;name&quot;: post.category.name},
+            tags=[{&quot;id&quot;: tag.id, &quot;name&quot;: tag.name} for tag in post.tags]
+        )
+    except DoesNotExist:
+        raise HTTPException(status_code=404, detail=&quot;Post not found&quot;)
+
+@router.post(&quot;/posts&quot;, response_model=PostResponse)
+async def create_post(post: PostCreate):
+    # Create slug from title
+    slug = post.title.lower().replace(&quot; &quot;, &quot;-&quot;).replace(&quot;_&quot;, &quot;-&quot;)
+
+    # Get category
+    try:
+        category = await Category.get(id=post.category_id)
+    except DoesNotExist:
+        raise HTTPException(status_code=400, detail=&quot;Category not found&quot;)
+
+    # Create post
+    db_post = await Post.create(
+        title=post.title,
+        slug=slug,
+        content=post.content,
+        excerpt=post.excerpt,
+        published=post.published,
+        featured=post.featured,
+        category=category,
+        published_at=datetime.now() if post.published else None
+    )
+
+    # Add tags
+    if post.tag_ids:
+        tags = await Tag.filter(id__in=post.tag_ids)
+        await db_post.tags.add(*tags)
+
+    return PostResponse.from_orm(db_post)
+
+@router.put(&quot;/posts/{post_id}&quot;, response_model=PostResponse)
+async def update_post(post_id: int, post: PostUpdate):
+    try:
+        db_post = await Post.get(id=post_id)
+    except DoesNotExist:
+        raise HTTPException(status_code=404, detail=&quot;Post not found&quot;)
+
+    # Update fields
+    update_data = post.dict(exclude_unset=True)
+    if 'category_id' in update_data:
+        try:
+            category = await Category.get(id=update_data['category_id'])
+            update_data['category'] = category
+            del update_data['category_id']
+        except DoesNotExist:
+            raise HTTPException(status_code=400, detail=&quot;Category not found&quot;)
+
+    for field, value in update_data.items():
+        if field != 'tag_ids':
+            setattr(db_post, field, value)
+
+    await db_post.save()
+
+    # Update tags
+    if 'tag_ids' in update_data:
+        tags = await Tag.filter(id__in=update_data['tag_ids'])
+        await db_post.tags.clear()
+        await db_post.tags.add(*tags)
+
+    return PostResponse.from_orm(db_post)
+
+@router.delete(&quot;/posts/{post_id}&quot;)
+async def delete_post(post_id: int):
+    try:
+        post = await Post.get(id=post_id)
+        await post.delete()
+        return {&quot;message&quot;: &quot;Post deleted successfully&quot;}
+    except DoesNotExist:
+        raise HTTPException(status_code=404, detail=&quot;Post not found&quot;)
+
+# Comment endpoints
+@router.get(&quot;/posts/{post_id}/comments&quot;)
+async def list_comments(post_id: int, approved_only: bool = True):
+    try:
+        post = await Post.get(id=post_id)
+    except DoesNotExist:
+        raise HTTPException(status_code=404, detail=&quot;Post not found&quot;)
+
+    query = Comment.filter(post=post)
+    if approved_only:
+        query = query.filter(approved=True)
+
+    comments = await query.order_by('-created_at')
+    return [{&quot;id&quot;: c.id, &quot;author_name&quot;: c.author_name, &quot;content&quot;: c.content, &quot;created_at&quot;: c.created_at} for c in comments]
+
+@router.post(&quot;/posts/{post_id}/comments&quot;)
+async def create_comment(post_id: int, author_name: str, author_email: str, content: str):
+    try:
+        post = await Post.get(id=post_id)
+    except DoesNotExist:
+        raise HTTPException(status_code=404, detail=&quot;Post not found&quot;)
+
+    comment = await Comment.create(
+        post=post,
+        author_name=author_name,
+        author_email=author_email,
+        content=content
+    )
+
+    return {&quot;id&quot;: comment.id, &quot;message&quot;: &quot;Comment created successfully&quot;}
+</code></pre>
+<h3 id="admin-configuration">Admin Configuration</h3>
+<p>Set up admin interface in <code>blog/admin.py</code>:</p>
+<pre><code class="language-python">from fastapi import FastAPI
+from fast_django.admin import AdminSite
+from fast_django.settings import Settings
+
+def init_admin(app: FastAPI, settings: Settings) -&gt; None:
+    site = AdminSite(title=&quot;Blog Admin&quot;)
+    site.mount(app, settings)
+
+    # Register models when model registration is implemented
+    # site.register_model(Post)
+    # site.register_model(Category)
+    # site.register_model(Tag)
+    # site.register_model(Comment)
+</code></pre>
+<h3 id="database-setup">Database Setup</h3>
+<pre><code class="language-bash"># Create migrations
+python manage.py makemigrations
+
+# Apply migrations
+python manage.py migrate
+
+# Create superuser
+python manage.py createsuperuser --email admin@example.com
+
+# Start development server
+python manage.py runserver
+</code></pre>
+<h2 id="e-commerce-api">E-commerce API</h2>
+<p>A more complex example showing user management, product catalog, and order processing.</p>
+<h3 id="models_1">Models</h3>
+<pre><code class="language-python"># users/models.py
+from fast_django.orm import Model, fields
+from passlib.context import CryptContext
+
+pwd_context = CryptContext(schemes=[&quot;bcrypt&quot;], deprecated=&quot;auto&quot;)
+
+class User(Model):
+    id = fields.IntField(pk=True)
+    email = fields.CharField(max_length=100, unique=True)
+    username = fields.CharField(max_length=50, unique=True)
+    password_hash = fields.CharField(max_length=128)
+    first_name = fields.CharField(max_length=50)
+    last_name = fields.CharField(max_length=50)
+    is_active = fields.BooleanField(default=True)
+    is_staff = fields.BooleanField(default=False)
+    created_at = fields.DatetimeField(auto_now_add=True)
+
+    def set_password(self, password: str):
+        self.password_hash = pwd_context.hash(password)
+
+    def check_password(self, password: str) -&gt; bool:
+        return pwd_context.verify(password, self.password_hash)
+
+# products/models.py
+class Category(Model):
+    id = fields.IntField(pk=True)
+    name = fields.CharField(max_length=100)
+    slug = fields.CharField(max_length=100, unique=True)
+    description = fields.TextField(null=True)
+    parent = fields.ForeignKeyField('models.Category', null=True, related_name='children')
+
+class Product(Model):
+    id = fields.IntField(pk=True)
+    name = fields.CharField(max_length=200)
+    slug = fields.CharField(max_length=200, unique=True)
+    description = fields.TextField()
+    price = fields.DecimalField(max_digits=10, decimal_places=2)
+    stock_quantity = fields.IntField(default=0)
+    sku = fields.CharField(max_length=100, unique=True)
+    active = fields.BooleanField(default=True)
+    created_at = fields.DatetimeField(auto_now_add=True)
+    updated_at = fields.DatetimeField(auto_now=True)
+
+    category = fields.ForeignKeyField('models.Category', related_name='products')
+    tags = fields.ManyToManyField('models.Tag', related_name='products')
+
+class Order(Model):
+    id = fields.IntField(pk=True)
+    user = fields.ForeignKeyField('models.User', related_name='orders')
+    status = fields.CharField(max_length=20, default='pending')  # pending, paid, shipped, delivered, cancelled
+    total_amount = fields.DecimalField(max_digits=10, decimal_places=2)
+    created_at = fields.DatetimeField(auto_now_add=True)
+    updated_at = fields.DatetimeField(auto_now=True)
+
+    items = fields.ManyToManyField('models.OrderItem', related_name='order')
+
+class OrderItem(Model):
+    id = fields.IntField(pk=True)
+    order = fields.ForeignKeyField('models.Order', related_name='order_items')
+    product = fields.ForeignKeyField('models.Product', related_name='order_items')
+    quantity = fields.IntField()
+    unit_price = fields.DecimalField(max_digits=10, decimal_places=2)
+    total_price = fields.DecimalField(max_digits=10, decimal_places=2)
+</code></pre>
+<h3 id="api-routes_1">API Routes</h3>
+<pre><code class="language-python"># products/routes.py
+from fast_django.routers import APIRouter
+from fastapi import HTTPException, Depends
+from typing import List, Optional
+from pydantic import BaseModel
+
+router = APIRouter(prefix=&quot;/api/products&quot;, tags=[&quot;products&quot;])
+
+class ProductResponse(BaseModel):
+    id: int
+    name: str
+    slug: str
+    description: str
+    price: float
+    stock_quantity: int
+    sku: str
+    active: bool
+    category: dict
+    tags: List[dict]
+
+@router.get(&quot;/&quot;, response_model=List[ProductResponse])
+async def list_products(
+    skip: int = 0,
+    limit: int = 20,
+    category_id: Optional[int] = None,
+    min_price: Optional[float] = None,
+    max_price: Optional[float] = None,
+    search: Optional[str] = None
+):
+    query = Product.filter(active=True)
+
+    if category_id:
+        query = query.filter(category_id=category_id)
+    if min_price is not None:
+        query = query.filter(price__gte=min_price)
+    if max_price is not None:
+        query = query.filter(price__lte=max_price)
+    if search:
+        query = query.filter(name__icontains=search)
+
+    products = await query.offset(skip).limit(limit).prefetch_related('category', 'tags')
+
+    return [
+        ProductResponse(
+            id=p.id,
+            name=p.name,
+            slug=p.slug,
+            description=p.description,
+            price=float(p.price),
+            stock_quantity=p.stock_quantity,
+            sku=p.sku,
+            active=p.active,
+            category={&quot;id&quot;: p.category.id, &quot;name&quot;: p.category.name},
+            tags=[{&quot;id&quot;: t.id, &quot;name&quot;: t.name} for t in p.tags]
+        ) for p in products
+    ]
+
+@router.get(&quot;/{product_id}&quot;, response_model=ProductResponse)
+async def get_product(product_id: int):
+    try:
+        product = await Product.get(id=product_id, active=True).prefetch_related('category', 'tags')
+        return ProductResponse.from_orm(product)
+    except DoesNotExist:
+        raise HTTPException(status_code=404, detail=&quot;Product not found&quot;)
+</code></pre>
+<h2 id="real-time-chat-application">Real-time Chat Application</h2>
+<p>An example using WebSockets for real-time communication.</p>
+<h3 id="models_2">Models</h3>
+<pre><code class="language-python"># chat/models.py
+from fast_django.orm import Model, fields
+from datetime import datetime
+
+class ChatRoom(Model):
+    id = fields.IntField(pk=True)
+    name = fields.CharField(max_length=100)
+    description = fields.TextField(null=True)
+    created_by = fields.ForeignKeyField('models.User', related_name='created_rooms')
+    created_at = fields.DatetimeField(auto_now_add=True)
+    is_private = fields.BooleanField(default=False)
+
+    members = fields.ManyToManyField('models.User', related_name='chat_rooms')
+
+class Message(Model):
+    id = fields.IntField(pk=True)
+    room = fields.ForeignKeyField('models.ChatRoom', related_name='messages')
+    sender = fields.ForeignKeyField('models.User', related_name='sent_messages')
+    content = fields.TextField()
+    message_type = fields.CharField(max_length=20, default='text')  # text, image, file
+    created_at = fields.DatetimeField(auto_now_add=True)
+    edited_at = fields.DatetimeField(null=True)
+    is_deleted = fields.BooleanField(default=False)
+</code></pre>
+<h3 id="websocket-routes">WebSocket Routes</h3>
+<pre><code class="language-python"># chat/websocket.py
+from fastapi import WebSocket, WebSocketDisconnect
+from fast_django.routers import APIRouter
+import json
+
+router = APIRouter(prefix=&quot;/ws&quot;, tags=[&quot;websocket&quot;])
+
+class ConnectionManager:
+    def __init__(self):
+        self.active_connections: List[WebSocket] = []
+        self.room_connections: Dict[int, List[WebSocket]] = {}
+
+    async def connect(self, websocket: WebSocket, room_id: int):
+        await websocket.accept()
+        self.active_connections.append(websocket)
+        if room_id not in self.room_connections:
+            self.room_connections[room_id] = []
+        self.room_connections[room_id].append(websocket)
+
+    def disconnect(self, websocket: WebSocket, room_id: int):
+        self.active_connections.remove(websocket)
+        if room_id in self.room_connections:
+            self.room_connections[room_id].remove(websocket)
+
+    async def send_personal_message(self, message: str, websocket: WebSocket):
+        await websocket.send_text(message)
+
+    async def broadcast_to_room(self, message: str, room_id: int):
+        if room_id in self.room_connections:
+            for connection in self.room_connections[room_id]:
+                try:
+                    await connection.send_text(message)
+                except:
+                    # Remove dead connections
+                    self.room_connections[room_id].remove(connection)
+
+manager = ConnectionManager()
+
+@router.websocket(&quot;/chat/{room_id}&quot;)
+async def websocket_endpoint(websocket: WebSocket, room_id: int):
+    await manager.connect(websocket, room_id)
+    try:
+        while True:
+            data = await websocket.receive_text()
+            message_data = json.loads(data)
+
+            # Save message to database
+            message = await Message.create(
+                room_id=room_id,
+                sender_id=message_data['user_id'],
+                content=message_data['content'],
+                message_type=message_data.get('type', 'text')
+            )
+
+            # Broadcast to room
+            await manager.broadcast_to_room(
+                json.dumps({
+                    &quot;id&quot;: message.id,
+                    &quot;content&quot;: message.content,
+                    &quot;sender&quot;: message_data['username'],
+                    &quot;timestamp&quot;: message.created_at.isoformat(),
+                    &quot;type&quot;: message.message_type
+                }),
+                room_id
+            )
+    except WebSocketDisconnect:
+        manager.disconnect(websocket, room_id)
+</code></pre>
+<h2 id="best-practices">Best Practices</h2>
+<ol>
+<li><strong>Structure your code</strong> with clear separation of concerns</li>
+<li><strong>Use Pydantic models</strong> for request/response validation</li>
+<li><strong>Handle errors gracefully</strong> with appropriate HTTP status codes</li>
+<li><strong>Use async/await</strong> for all database operations</li>
+<li><strong>Implement proper authentication</strong> and authorization</li>
+<li><strong>Add comprehensive logging</strong> for debugging and monitoring</li>
+<li><strong>Write tests</strong> for your API endpoints</li>
+<li><strong>Use environment variables</strong> for configuration</li>
+<li><strong>Implement rate limiting</strong> for production APIs</li>
+<li><strong>Add API documentation</strong> with clear examples</li>
+</ol>
+<h2 id="next-steps">Next Steps</h2>
+<ul>
+<li>Explore the API Reference:</li>
+<li><a href="../api/core/">Core API</a></li>
+<li><a href="../api/orm/">ORM API</a></li>
+<li><a href="../api/cli/">CLI API</a></li>
+<li>Read about <a href="../migrations/">Migrations</a> and <a href="../settings/">Settings</a></li>
+<li>Review <a href="../middleware/">Middleware</a> and <a href="../routing/">Routing</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "search.share", "content.code.copy"], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+    
+  </body>
+</html>
