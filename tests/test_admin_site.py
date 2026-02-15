@@ -5,12 +5,15 @@ from typing import Any
 
 from fastapi import FastAPI
 
+import fast_django.admin as admin_mod
 from fast_django.admin import AdminSite
 from fast_django.orm import Model, fields
 from fast_django.settings import Settings
 
 
-def test_admin_site_mount_success() -> None:
+def test_admin_site_mount_success(monkeypatch: Any) -> None:
+    dummy = types.SimpleNamespace(app=FastAPI())
+    monkeypatch.setattr(admin_mod, "import_module", lambda name: dummy)
     app = FastAPI()
     site = AdminSite(title="X")
     site.mount(app, Settings(), path="/admin")

@@ -12,6 +12,9 @@ This repository evolves Django-like DX on top of FastAPI, with `manage.py` workf
 - Add only necessary comments; avoid redundant comments.
 - Keep docstrings accurate and update docs whenever behavior changes.
 - Add/maintain unit tests for every behavior change.
+- Work as a senior tech lead: prioritize long-term maintainability and explicit tradeoffs.
+- Prefer explicit exception types and failure paths; do not silently ignore runtime errors.
+- Avoid generic `try/except` blocks that hide failures from error monitoring systems.
 
 ## Dependency and Packaging Standards
 - Project dependency source of truth is `pyproject.toml`.
@@ -34,6 +37,7 @@ This repository evolves Django-like DX on top of FastAPI, with `manage.py` workf
 - Update docs for any CLI/configuration/architecture changes.
 - Commit on a dedicated branch prefixed with `codex/`.
 - Never push unless explicitly requested.
+- Before release, run lock + lint + type-check + tests + build + artifact checks.
 
 ## Recursive Maintenance Rule
 When this file or project conventions become outdated:

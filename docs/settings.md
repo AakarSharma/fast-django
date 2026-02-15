@@ -49,6 +49,21 @@ class Settings(Settings):
     admin_path: str = "/admin"
 ```
 
+
+### Authentication & Session Settings
+
+```python
+class Settings(Settings):
+    auth_enabled: bool = True
+    auth_sync_permissions_on_startup: bool = False
+
+    session_cookie_name: str = "sessionid"
+    session_cookie_secure: bool = False
+    session_cookie_httponly: bool = True
+    session_cookie_samesite: Literal["lax", "strict", "none"] = "lax"
+    session_age_seconds: int = 1209600
+```
+
 ### Database Configuration
 
 ```python

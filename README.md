@@ -38,6 +38,7 @@ fast-django brings the familiar Django development experience to modern ASGI app
 - 🚀 **FastAPI-powered** - Built on FastAPI for high performance and automatic API docs
 - 🔄 **Aerich Migrations** - Database migrations with automatic discovery
 - 🔔 **Signals** - Django-like request and ORM signals
+- 🔐 **Django-Compatible Auth** - users, groups, permissions, sessions, and admin log tables
 
 ## 🚀 Quick Start
 
@@ -62,13 +63,16 @@ python manage.py makemigrations
 python manage.py migrate
 
 # Create a superuser
-python manage.py createsuperuser --email admin@example.com
+python manage.py createsuperuser --username admin --email admin@example.com
 
 # Start the development server
 python manage.py runserver
 ```
 
-Visit `http://127.0.0.1:8000` to see your app and `http://127.0.0.1:8000/docs` for automatic API documentation!
+Visit:
+- `http://127.0.0.1:8000` for your app
+- `http://127.0.0.1:8000/docs` for API docs
+- `http://127.0.0.1:8000/admin` for admin
 
 ## 📖 Documentation
 
@@ -186,6 +190,31 @@ uv run mkdocs serve
 
 # Build documentation
 uv run mkdocs build
+```
+
+### Releasing with uv
+
+Release preparation is standardized in `scripts/release.sh`:
+
+```bash
+# Validate + build artifacts using current version
+./scripts/release.sh
+
+# Bump version and run full release validation
+./scripts/release.sh patch   # or: minor / major
+```
+
+What the script does:
+- runs `uv lock`
+- installs/syncs all extras with `uv sync --all-extras --frozen`
+- runs lint, type checks, and unit tests
+- builds package artifacts with `uv build`
+- validates artifacts with `twine check`
+
+After a successful run, publish with:
+
+```bash
+uv publish --token $PYPI_TOKEN
 ```
 
 ## 🤝 Contributing

@@ -1,20 +1,21 @@
 # Getting Started
 
-This guide walks through your first fast-django project.
+This tutorial walks through a full Django-like flow in fast-django: project scaffolding, app creation,
+app-local migrations, auth/session tables, superuser creation, and admin startup.
 
-## Installation
+## 1. Install
 
 ```bash
 uv tool install fast-django
 ```
 
-For repository development:
+For local package development:
 
 ```bash
 uv sync --all-extras
 ```
 
-## Create a Project
+## 2. Create a Project
 
 ```bash
 fast-django startproject mysite
@@ -36,7 +37,7 @@ mysite/
     └── admin.py
 ```
 
-## Create an App
+## 3. Create an App
 
 ```bash
 fast-django startapp blog
@@ -55,40 +56,82 @@ blog/
     └── __init__.py
 ```
 
-## Add App to Settings
+## 4. Register the App in Settings
+
+Edit `mysite/settings.py`:
 
 ```python
 class Settings(Settings):
     app_name: str = "mysite"
     debug: bool = True
-    orm: OrmConfig = OrmConfig(models=["mysite.models", "blog.models", "aerich.models"])
+    orm: OrmConfig = OrmConfig(
+        models=[
+            "fast_django.contrib.auth.models",
+            "fast_django.contrib.admin.models",
+            "mysite.models",
+            "blog.models",
+            "aerich.models",
+        ]
+    )
     installed_apps: list[str] = ["mysite", "blog"]
 ```
 
-## Migrations
+## 5. Create and Apply Migrations
 
 ```bash
 python manage.py makemigrations
-python manage.py makemigrations --app blog
 python manage.py migrate
 ```
 
-Migrations are generated per app and stored under each app's `migrations/` directory.
+Behavior:
 
-## Run Server
+- app migrations are stored under `<app>/migrations/`
+- built-in auth/admin migrations are stored under `.fast_django/migrations/auth/`
+- default permissions (`add`, `change`, `delete`, `view`) are synced on `migrate`
+
+For scoped workflows, pair commands by app:
+
+```bash
+python manage.py makemigrations --app blog
+python manage.py migrate --app blog
+```
+
+You can resync permissions explicitly:
+
+```bash
+python manage.py syncpermissions
+```
+
+## 6. Create a Superuser
+
+```bash
+python manage.py createsuperuser --username admin --email admin@example.com
+```
+
+The command prompts for password and confirmation. Weak passwords trigger warnings, with an explicit bypass prompt.
+Created superusers are marked `is_staff=True` and `is_superuser=True`.
+
+## 7. Run the Server
 
 ```bash
 python manage.py runserver
 ```
 
-Visit `http://127.0.0.1:8000/docs`.
+Open:
 
-## Admin
+- `http://127.0.0.1:8000/docs`
+- `http://127.0.0.1:8000/admin`
 
-```python
-class Settings(Settings):
-    admin_enabled: bool = True
-    admin_path: str = "/admin"
-```
+## 8. Validate Django-Compatible Auth Tables
 
-Visit `http://127.0.0.1:8000/admin`.
+After migrations, expected tables include:
+
+- `auth_user`
+- `auth_group`
+- `auth_permission`
+- `auth_user_groups`
+- `auth_user_user_permissions`
+- `auth_group_permissions`
+- `django_content_type`
+- `django_session`
+- `django_admin_log`

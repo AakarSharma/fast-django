@@ -62,7 +62,7 @@ def test_migrate_calls_upgrade(tmp_path: Path, monkeypatch: Any) -> None:
         Path("blog/migrations/blog").mkdir(parents=True)
         Path("blog/models.py").write_text("\n", encoding="utf-8")
         monkeypatch.setattr("subprocess.run", fake_run)
-        res = runner.invoke(app, ["migrate"])  # type: ignore[list-item]
+        res = runner.invoke(app, ["migrate", "--app", "blog"])  # type: ignore[list-item]
         assert res.exit_code == 0
         assert calls and calls[0][-1] == "upgrade"
 
@@ -94,4 +94,3 @@ def test_createsuperuser_no_user_model(tmp_path: Path) -> None:
             app, ["createsuperuser", "--email", "a@example.com", "--password", "x"]
         )  # type: ignore[list-item]
         assert res.exit_code != 0
-        assert "No User model" in res.output

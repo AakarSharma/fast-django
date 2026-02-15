@@ -1,14 +1,20 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Any
+from typing import Any, Literal
 
 from pydantic import BaseModel, Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class OrmConfig(BaseModel):
-    models: list[str] = Field(default_factory=lambda: ["aerich.models"])
+    models: list[str] = Field(
+        default_factory=lambda: [
+            "fast_django.contrib.auth.models",
+            "fast_django.contrib.admin.models",
+            "aerich.models",
+        ]
+    )
     connections: dict[str, Any] = Field(default_factory=lambda: {"default": "sqlite://db.sqlite3"})
     apps: dict[str, dict[str, Any]] = Field(default_factory=dict)
 
@@ -20,7 +26,14 @@ class Settings(BaseSettings):
     debug: bool = False
     secret_key: str = "change-me"
 
-    base_dir: Path = Field(default_factory=lambda: Path.cwd())
+    base_dir: Path = Field(default_factory=Path.cwd)
+    auth_enabled: bool = True
+    auth_sync_permissions_on_startup: bool = False
+    session_cookie_name: str = "sessionid"
+    session_cookie_secure: bool = False
+    session_cookie_httponly: bool = True
+    session_cookie_samesite: Literal["lax", "strict", "none"] = "lax"
+    session_age_seconds: int = 1209600
     admin_enabled: bool = True
     admin_path: str = "/admin"
 

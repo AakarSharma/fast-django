@@ -5,6 +5,8 @@ from importlib import import_module
 
 from fastapi import FastAPI
 
+from .contrib.admin import router as contrib_admin_router
+
 try:
     from tortoise.models import Model
 except ImportError:  # pragma: no cover - only if tortoise missing in env
@@ -33,6 +35,7 @@ class AdminSite:
             module = import_module("fastapi_admin.app")
         except ModuleNotFoundError:
             placeholder = FastAPI(title=f"{self.title} placeholder")
+            placeholder.include_router(contrib_admin_router, prefix="/api")
 
             @placeholder.get("/")
             def _placeholder() -> dict[str, str]:
@@ -49,11 +52,12 @@ class AdminSite:
         self._models.append(model)
 
 
-def try_call_admin_hooks(app: FastAPI, settings: Settings) -> None:
+def try_call_admin_hooks(app: FastAPI, settings: Settings) -> bool:
     """
     If an installed app defines `admin.init_admin(app, settings)`, call it.
     Allows projects to wire AdminSite without exposing fastapi-admin directly.
     """
+    called = False
     for app_name in settings.installed_apps:
         try:
             module = import_module(f"{app_name}.admin")
@@ -64,3 +68,5 @@ def try_call_admin_hooks(app: FastAPI, settings: Settings) -> None:
         hook: Callable[[FastAPI, Settings], None] | None = getattr(module, "init_admin", None)
         if callable(hook):
             hook(app, settings)
+            called = True
+    return called
