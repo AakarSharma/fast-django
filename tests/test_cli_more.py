@@ -90,7 +90,5 @@ def test_runserver_fallback_app_target(tmp_path: Path) -> None:
 
 def test_createsuperuser_no_user_model(tmp_path: Path) -> None:
     with runner.isolated_filesystem(temp_dir=str(tmp_path)):
-        res = runner.invoke(
-            app, ["createsuperuser", "--email", "a@example.com", "--password", "x"]
-        )  # type: ignore[list-item]
+        res = runner.invoke(app, ["createsuperuser", "--email", "a@example.com", "--password", "x"])  # type: ignore[list-item]
         assert res.exit_code != 0

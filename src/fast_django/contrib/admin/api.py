@@ -11,7 +11,9 @@ router = APIRouter(prefix="/auth", tags=["admin-auth"])
 async def _require_admin(request: Request) -> User:
     user = get_request_user(request)
     if not isinstance(user, User) or not user.is_authenticated:
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Authentication required")
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED, detail="Authentication required"
+        )
     if not user.is_staff and not user.is_superuser:
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Staff access required")
     return user
@@ -71,22 +73,30 @@ async def assign_user_group(user_id: int, group_id: int, request: Request) -> di
 
 
 @router.post("/users/{user_id:int}/permissions/{permission_id:int}")
-async def assign_user_permission(user_id: int, permission_id: int, request: Request) -> dict[str, str]:
+async def assign_user_permission(
+    user_id: int, permission_id: int, request: Request
+) -> dict[str, str]:
     await _require_admin(request)
     user = await User.get_or_none(id=user_id)
     permission = await Permission.get_or_none(id=permission_id)
     if user is None or permission is None:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User or permission not found")
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="User or permission not found"
+        )
     await user.user_permissions.add(permission)
     return {"status": "ok"}
 
 
 @router.post("/groups/{group_id:int}/permissions/{permission_id:int}")
-async def assign_group_permission(group_id: int, permission_id: int, request: Request) -> dict[str, str]:
+async def assign_group_permission(
+    group_id: int, permission_id: int, request: Request
+) -> dict[str, str]:
     await _require_admin(request)
     group = await Group.get_or_none(id=group_id)
     permission = await Permission.get_or_none(id=permission_id)
     if group is None or permission is None:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Group or permission not found")
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="Group or permission not found"
+        )
     await group.permissions.add(permission)
     return {"status": "ok"}

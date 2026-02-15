@@ -11,5 +11,7 @@ def test_validate_password_warns_for_common_short_numeric_password() -> None:
 
 
 def test_validate_password_accepts_strong_password() -> None:
-    warnings = validate_password("A-very-strong-password-42", username="admin", email="admin@example.com")
+    warnings = validate_password(
+        "A-very-strong-password-42", username="admin", email="admin@example.com"
+    )
     assert warnings == []

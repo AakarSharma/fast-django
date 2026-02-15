@@ -48,7 +48,9 @@ async def _exercise_session_auth() -> None:
         assert anonymous.status_code == httpx.codes.OK
         assert anonymous.json()["authenticated"] is False
 
-        authenticated = await client.get("/whoami", cookies={settings.session_cookie_name: session_key})
+        authenticated = await client.get(
+            "/whoami", cookies={settings.session_cookie_name: session_key}
+        )
         assert authenticated.status_code == httpx.codes.OK
         assert authenticated.json() == {"authenticated": True, "username": "session_user"}
 

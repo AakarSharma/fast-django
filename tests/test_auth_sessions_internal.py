@@ -46,9 +46,9 @@ async def _exercise_session_helpers() -> None:
     assert _decode_payload("invalid", settings.secret_key) is None
     encoded = _encode_payload({"k": "v"}, settings.secret_key)
     assert _decode_payload(encoded + "x", settings.secret_key) is None
-    assert _decode_payload(_encode_payload({"k": "v"}, settings.secret_key), settings.secret_key) == {
-        "k": "v"
-    }
+    assert _decode_payload(
+        _encode_payload({"k": "v"}, settings.secret_key), settings.secret_key
+    ) == {"k": "v"}
 
     key = await create_user_session(user, session_settings)
     resolved = await get_user_from_session(key, session_settings)
@@ -79,7 +79,9 @@ async def _exercise_session_helpers() -> None:
             "type": "http",
             "method": "GET",
             "path": "/",
-            "headers": [(b"cookie", f"{settings.session_cookie_name}={login_key}".encode("latin1"))],
+            "headers": [
+                (b"cookie", f"{settings.session_cookie_name}={login_key}".encode("latin1"))
+            ],
         }
     )
     await logout(request, response, session_settings)

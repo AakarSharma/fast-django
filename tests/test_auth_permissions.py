@@ -17,9 +17,9 @@ async def _exercise_permissions() -> None:
     await sync_content_types_and_permissions()
 
     permission_codenames = set(
-        await Permission.filter(content_type__app_label="auth", content_type__model="user").values_list(
-            "codename", flat=True
-        )
+        await Permission.filter(
+            content_type__app_label="auth", content_type__model="user"
+        ).values_list("codename", flat=True)
     )
     assert {"add_user", "change_user", "delete_user", "view_user"}.issubset(permission_codenames)
 

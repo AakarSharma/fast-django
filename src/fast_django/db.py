@@ -25,9 +25,7 @@ def build_tortoise_config(settings: Settings) -> dict[str, Any]:
         else:
             app_label = model_module.split(".", 1)[0]
 
-        app_config = apps.setdefault(
-            app_label, {"models": [], "default_connection": "default"}
-        )
+        app_config = apps.setdefault(app_label, {"models": [], "default_connection": "default"})
         if model_module not in app_config["models"]:
             app_config["models"].append(model_module)
 

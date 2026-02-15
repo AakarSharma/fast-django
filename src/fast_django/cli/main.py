@@ -327,7 +327,9 @@ def createsuperuser(
         typer.echo("Password validation warnings:", err=True)
         for warning in warnings:
             typer.echo(f" - {warning}", err=True)
-        if not typer.confirm("Bypass password validation and create superuser anyway?", default=False):
+        if not typer.confirm(
+            "Bypass password validation and create superuser anyway?", default=False
+        ):
             raise typer.Exit(1)
 
     from tortoise import Tortoise, run_async  # noqa: PLC0415

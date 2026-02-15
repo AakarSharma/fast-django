@@ -76,7 +76,9 @@ async def destroy_user_session(session_key: str | None) -> None:
     await Session.filter(session_key=session_key).delete()
 
 
-async def get_user_from_session(session_key: str | None, settings: SessionSettings) -> User | AnonymousUser:
+async def get_user_from_session(
+    session_key: str | None, settings: SessionSettings
+) -> User | AnonymousUser:
     user = await _resolve_user_from_session(session_key, settings)
     if user is None:
         return AnonymousUser()

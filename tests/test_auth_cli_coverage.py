@@ -37,7 +37,9 @@ def test_load_orm_config_module_missing_and_bad_spec(tmp_path: Path, monkeypatch
             cli_main._load_orm_config_module()
 
         Path("orm_config.py").write_text("ORM = {}\n", encoding="utf-8")
-        monkeypatch.setattr(cli_main.importlib.util, "spec_from_file_location", lambda *a, **k: None)
+        monkeypatch.setattr(
+            cli_main.importlib.util, "spec_from_file_location", lambda *a, **k: None
+        )
         with pytest.raises(typer.Exit):
             cli_main._load_orm_config_module()
 
@@ -65,7 +67,9 @@ def test_migrate_calls_sync_permissions_when_global(monkeypatch: Any, tmp_path: 
         monkeypatch.setattr(cli_main, "_discover_target_apps", lambda app: ["blog"])
         monkeypatch.setattr(cli_main, "_ensure_aerich_config", lambda app_name: Path("x.toml"))
         monkeypatch.setattr(cli_main, "_aerich_state_dir", lambda app_name: Path("."))
-        monkeypatch.setattr(cli_main, "_run_aerich", lambda config, app_name, args: calls.append(tuple(args)))
+        monkeypatch.setattr(
+            cli_main, "_run_aerich", lambda config, app_name, args: calls.append(tuple(args))
+        )
         monkeypatch.setattr(
             cli_main,
             "_sync_permissions_from_orm_config",
@@ -181,7 +185,15 @@ def test_createsuperuser_custom_missing_module(tmp_path: Path) -> None:
     with runner.isolated_filesystem(temp_dir=str(tmp_path)):
         res = runner.invoke(
             cli_main.app,
-            ["createsuperuser", "--models", "missing.models", "--password", "x", "--email", "x@y.com"],
+            [
+                "createsuperuser",
+                "--models",
+                "missing.models",
+                "--password",
+                "x",
+                "--email",
+                "x@y.com",
+            ],
         )  # type: ignore[list-item]
         assert res.exit_code != 0
         assert "No User model found" in res.output
@@ -229,7 +241,15 @@ def test_createsuperuser_allows_password_warning_with_bypass(
         _DummyUser.existing = False
         res = runner.invoke(
             cli_main.app,
-            ["createsuperuser", "--username", "admin2", "--email", "b@example.com", "--password", "123"],
+            [
+                "createsuperuser",
+                "--username",
+                "admin2",
+                "--email",
+                "b@example.com",
+                "--password",
+                "123",
+            ],
         )  # type: ignore[list-item]
         assert res.exit_code == 0
         assert "Superuser created" in res.output
