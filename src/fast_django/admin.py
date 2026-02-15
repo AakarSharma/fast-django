@@ -7,7 +7,7 @@ from fastapi import FastAPI
 
 try:
     from tortoise.models import Model
-except Exception:  # pragma: no cover - only if tortoise missing in env
+except ImportError:  # pragma: no cover - only if tortoise missing in env
 
     class Model:  # type: ignore
         pass
@@ -31,9 +31,7 @@ class AdminSite:
         mount_path = path or settings.admin_path
         try:
             module = import_module("fastapi_admin.app")
-            app.mount(mount_path, module.app)
-            self._mounted = True
-        except Exception:
+        except ModuleNotFoundError:
             placeholder = FastAPI(title=f"{self.title} placeholder")
 
             @placeholder.get("/")
@@ -42,10 +40,13 @@ class AdminSite:
 
             app.mount(mount_path, placeholder)
             self._mounted = True
+            return
+
+        app.mount(mount_path, module.app)
+        self._mounted = True
 
     def register_model(self, model: type[Model]) -> None:
         self._models.append(model)
-        # Note: fastapi-admin resource registration can be integrated here in future
 
 
 def try_call_admin_hooks(app: FastAPI, settings: Settings) -> None:
@@ -56,11 +57,10 @@ def try_call_admin_hooks(app: FastAPI, settings: Settings) -> None:
     for app_name in settings.installed_apps:
         try:
             module = import_module(f"{app_name}.admin")
-        except ModuleNotFoundError:
+        except ModuleNotFoundError as exc:
+            if exc.name != f"{app_name}.admin":
+                raise
             continue
         hook: Callable[[FastAPI, Settings], None] | None = getattr(module, "init_admin", None)
         if callable(hook):
-            try:
-                hook(app, settings)
-            except Exception:
-                continue
+            hook(app, settings)

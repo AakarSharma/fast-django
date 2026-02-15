@@ -32,7 +32,7 @@ Creates a new fast-django project.
 - `asgi.py` ASGI application
 - `settings.py` configuration
 - `orm_config.py` database config
-- `aerich.ini` migration config
+- app-scoped Aerich config under `.fast_django/aerich/`
 
 **Example:**
 ```bash
@@ -338,5 +338,5 @@ cat pyproject.toml
 
 # Verify database config
 cat orm_config.py
-cat aerich.ini
+ls -la .fast_django/aerich
 ```

@@ -44,7 +44,7 @@ fast-django brings the familiar Django development experience to modern ASGI app
 ### Installation
 
 ```bash
-pip install fast-django
+uv tool install fast-django
 ```
 
 ### Create Your First Project
@@ -80,8 +80,8 @@ Visit `http://127.0.0.1:8000` to see your app and `http://127.0.0.1:8000/docs` f
 ### Local Documentation
 
 ```bash
-pip install "fast-django[docs]"
-mkdocs serve
+uv sync --extra docs
+uv run mkdocs serve
 ```
 
 ## 🎯 Why fast-django?
@@ -136,7 +136,7 @@ fast-django provides a clean abstraction layer that combines:
 ### Prerequisites
 
 - Python 3.11+
-- pip or your preferred package manager
+- [uv](https://github.com/astral-sh/uv)
 
 ### Installation
 
@@ -145,11 +145,11 @@ fast-django provides a clean abstraction layer that combines:
 git clone https://github.com/AakarSharma/fast-django.git
 cd fast-django
 
-# Install in development mode
-pip install -e ".[dev,test,docs]"
+# Install dependencies with lockfile
+uv sync --all-extras
 
 # Install pre-commit hooks
-pre-commit install
+uv run pre-commit install
 ```
 
 ### Pre-commit
@@ -157,36 +157,35 @@ pre-commit install
 We use pre-commit to run Ruff and MyPy before each commit.
 
 ```bash
-pip install pre-commit
-pre-commit install
+uv run pre-commit install
 # Run on all files
-pre-commit run --all-files
+uv run pre-commit run --all-files
 ```
 
 ### Running Tests
 
 ```bash
 # Run all tests
-pytest
+uv run pytest
 
 # Run with coverage
-pytest --cov=src/fast_django --cov-report=html
+uv run pytest --cov=src/fast_django --cov-report=html
 
 # Run linting
-ruff check . && ruff format --check .
+uv run ruff check . && uv run ruff format --check .
 
 # Run type checking
-mypy src
+uv run mypy src
 ```
 
 ### Building Documentation
 
 ```bash
 # Serve documentation locally
-mkdocs serve
+uv run mkdocs serve
 
 # Build documentation
-mkdocs build
+uv run mkdocs build
 ```
 
 ## 🤝 Contributing

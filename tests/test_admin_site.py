@@ -18,14 +18,12 @@ def test_admin_site_mount_success() -> None:
 
 
 def test_admin_site_mount_placeholder(monkeypatch: Any) -> None:
-    # Force failure to import fastapi_admin.app
     dummy = types.ModuleType("fastapi_admin")
     monkeypatch.setitem(__import__("sys").modules, "fastapi_admin", dummy)
 
     app = FastAPI()
     site = AdminSite(title="Y")
     site.mount(app, Settings(), path="/adm")
-    # placeholder mounted
     assert any(getattr(r, "path", "").startswith("/adm") for r in app.routes)
 
 
