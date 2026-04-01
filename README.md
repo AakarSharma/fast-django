@@ -1,5 +1,7 @@
 <div align="center">
 
+<img src="docs/assets/fast-django-logo.svg" alt="fast-django logo" width="560" />
+
 # fast-django
 
 **Django-like Developer Experience on ASGI with FastAPI, Tortoise ORM, Aerich, and FastAPI-Admin**

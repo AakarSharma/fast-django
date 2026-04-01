@@ -1,0 +1,22 @@
+<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">fast-django mark</title>
+  <desc id="desc">A rounded square mark with a teal gradient, a mint F monogram, and a white D monogram representing fast-django.</desc>
+  <defs>
+    <linearGradient id="bg" x1="36" y1="28" x2="220" y2="228" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#14B8A6"/>
+      <stop offset="0.55" stop-color="#0F766E"/>
+      <stop offset="1" stop-color="#123A57"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="56" y1="60" x2="132" y2="160" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#A7F3D0"/>
+      <stop offset="1" stop-color="#5EEAD4"/>
+    </linearGradient>
+  </defs>
+  <rect x="24" y="24" width="208" height="208" rx="56" fill="url(#bg)"/>
+  <path d="M58 56C58 49.3726 63.3726 44 70 44H128C150.385 44 166 59.6152 166 82V84C166 88.4183 162.418 92 158 92H70C63.3726 92 58 86.6274 58 80V56Z" fill="#0B1220" fill-opacity="0.15"/>
+  <path d="M54 74C54 69.5817 57.5817 66 62 66H134C138.418 66 142 69.5817 142 74C142 78.4183 138.418 82 134 82H62C57.5817 82 54 78.4183 54 74Z" fill="url(#accent)"/>
+  <path d="M54 112C54 107.582 57.5817 104 62 104H118C122.418 104 126 107.582 126 112C126 116.418 122.418 120 118 120H62C57.5817 120 54 116.418 54 112Z" fill="url(#accent)"/>
+  <path d="M54 74C54 69.5817 57.5817 66 62 66H70C74.4183 66 78 69.5817 78 74V182C78 186.418 74.4183 190 70 190H62C57.5817 190 54 186.418 54 182V74Z" fill="url(#accent)"/>
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M120 58C120 51.3726 125.373 46 132 46H150C186.451 46 210 69.5492 210 106V150C210 186.451 186.451 210 150 210H132C125.373 210 120 204.627 120 198V58ZM144 72V184H150C171.82 184 184 171.82 184 150V106C184 84.1797 171.82 72 150 72H144Z" fill="white"/>
+  <path d="M179.5 92C187.508 92 194 85.5081 194 77.5C194 69.4919 187.508 63 179.5 63C171.492 63 165 69.4919 165 77.5C165 85.5081 171.492 92 179.5 92Z" fill="#A7F3D0" fill-opacity="0.18"/>
+</svg>

@@ -2,6 +2,8 @@
 
 **Django-like Developer Experience on ASGI with FastAPI, Tortoise ORM, Aerich, and FastAPI-Admin.**
 
+![fast-django logo](assets/fast-django-logo.svg)
+
 fast-django brings the familiar Django development experience to modern ASGI applications, combining the power of FastAPI with Django's developer-friendly patterns.
 
 ## Quick Start
