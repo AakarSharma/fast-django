@@ -1,5 +1,7 @@
 <div align="center">
 
+<img src="docs/assets/fast-django-logo.svg" alt="fast-django logo" width="560" />
+
 # fast-django
 
 **Django-like Developer Experience on ASGI with FastAPI, Tortoise ORM, Aerich, and FastAPI-Admin**
@@ -38,13 +40,14 @@ fast-django brings the familiar Django development experience to modern ASGI app
 - 🚀 **FastAPI-powered** - Built on FastAPI for high performance and automatic API docs
 - 🔄 **Aerich Migrations** - Database migrations with automatic discovery
 - 🔔 **Signals** - Django-like request and ORM signals
+- 🔐 **Django-Compatible Auth** - users, groups, permissions, sessions, and admin log tables
 
 ## 🚀 Quick Start
 
 ### Installation
 
 ```bash
-pip install fast-django
+uv tool install fast-django
 ```
 
 ### Create Your First Project
@@ -62,13 +65,16 @@ python manage.py makemigrations
 python manage.py migrate
 
 # Create a superuser
-python manage.py createsuperuser --email admin@example.com
+python manage.py createsuperuser --username admin --email admin@example.com
 
 # Start the development server
 python manage.py runserver
 ```
 
-Visit `http://127.0.0.1:8000` to see your app and `http://127.0.0.1:8000/docs` for automatic API documentation!
+Visit:
+- `http://127.0.0.1:8000` for your app
+- `http://127.0.0.1:8000/docs` for API docs
+- `http://127.0.0.1:8000/admin` for admin
 
 ## 📖 Documentation
 
@@ -80,8 +86,8 @@ Visit `http://127.0.0.1:8000` to see your app and `http://127.0.0.1:8000/docs` f
 ### Local Documentation
 
 ```bash
-pip install "fast-django[docs]"
-mkdocs serve
+uv sync --extra docs
+uv run mkdocs serve
 ```
 
 ## 🎯 Why fast-django?
@@ -136,7 +142,7 @@ fast-django provides a clean abstraction layer that combines:
 ### Prerequisites
 
 - Python 3.11+
-- pip or your preferred package manager
+- [uv](https://github.com/astral-sh/uv)
 
 ### Installation
 
@@ -145,11 +151,11 @@ fast-django provides a clean abstraction layer that combines:
 git clone https://github.com/AakarSharma/fast-django.git
 cd fast-django
 
-# Install in development mode
-pip install -e ".[dev,test,docs]"
+# Install dependencies with lockfile
+uv sync --all-extras
 
 # Install pre-commit hooks
-pre-commit install
+uv run pre-commit install
 ```
 
 ### Pre-commit
@@ -157,36 +163,60 @@ pre-commit install
 We use pre-commit to run Ruff and MyPy before each commit.
 
 ```bash
-pip install pre-commit
-pre-commit install
+uv run pre-commit install
 # Run on all files
-pre-commit run --all-files
+uv run pre-commit run --all-files
 ```
 
 ### Running Tests
 
 ```bash
 # Run all tests
-pytest
+uv run pytest
 
 # Run with coverage
-pytest --cov=src/fast_django --cov-report=html
+uv run pytest --cov=src/fast_django --cov-report=html
 
 # Run linting
-ruff check . && ruff format --check .
+uv run ruff check . && uv run ruff format --check .
 
 # Run type checking
-mypy src
+uv run mypy src
 ```
 
 ### Building Documentation
 
 ```bash
 # Serve documentation locally
-mkdocs serve
+uv run mkdocs serve
 
 # Build documentation
-mkdocs build
+uv run mkdocs build
+```
+
+### Releasing with uv
+
+Release preparation is standardized in `scripts/release.sh`:
+
+```bash
+# Validate + build artifacts using current version
+./scripts/release.sh
+
+# Bump version and run full release validation
+./scripts/release.sh patch   # or: minor / major
+```
+
+What the script does:
+- runs `uv lock`
+- installs/syncs all extras with `uv sync --all-extras --frozen`
+- runs lint, type checks, and unit tests
+- builds package artifacts with `uv build`
+- validates artifacts with `twine check`
+
+After a successful run, publish with:
+
+```bash
+uv publish --token $PYPI_TOKEN
 ```
 
 ## 🤝 Contributing

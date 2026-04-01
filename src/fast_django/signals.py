@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import inspect
 from collections.abc import Awaitable, Callable, Iterable, MutableMapping
-from contextlib import suppress
 from typing import Any, cast
 
 from tortoise.models import Model
@@ -16,7 +15,7 @@ class AsyncSignal:
 
     - Receivers can be async or sync callables.
     - `send()` awaits async receivers and invokes sync receivers directly.
-    - Exceptions from receivers are not swallowed by default; callers may catch.
+    - Exceptions raised by receivers are propagated to the caller.
     """
 
     def __init__(self, name: str) -> None:
@@ -41,13 +40,10 @@ class AsyncSignal:
                 await result
 
 
-# Request lifecycle signals
 request_started = AsyncSignal("request_started")
 request_finished = AsyncSignal("request_finished")
 got_request_exception = AsyncSignal("got_request_exception")
 
-
-# ORM lifecycle signals
 pre_save = AsyncSignal("pre_save")
 post_save = AsyncSignal("post_save")
 pre_delete = AsyncSignal("pre_delete")
@@ -86,40 +82,25 @@ class SignalsMiddleware:
             await self.app(scope, receive, send)
             return
 
-        # Emit request_started best-effort
-        with suppress(Exception):
-            await request_started.send(sender=self, scope=scope)
-
+        await request_started.send(sender=self, scope=scope)
         finished_emitted = {"v": False}
 
         async def send_wrapper(message: MutableMapping[str, Any]) -> None:
             mtype = message.get("type")
-            if mtype == "http.response.start" and not finished_emitted["v"]:
-                with suppress(Exception):
-                    await request_finished.send(sender=self, scope=scope, message=message)
-                finished_emitted["v"] = True
-            elif mtype == "http.response.body" and not finished_emitted["v"]:
-                # Fallback: some stacks may not expose start; emit on first body
-                with suppress(Exception):
-                    await request_finished.send(sender=self, scope=scope, message=message)
+            if mtype in {"http.response.start", "http.response.body"} and not finished_emitted["v"]:
+                await request_finished.send(sender=self, scope=scope, message=message)
                 finished_emitted["v"] = True
             await send(message)
 
         try:
             await self.app(scope, receive, send_wrapper)
         except Exception as exc:
-            with suppress(Exception):
-                await got_request_exception.send(sender=self, scope=scope, exception=exc)
+            await got_request_exception.send(sender=self, scope=scope, exception=exc)
             raise
 
 
 def _is_created(instance: Any) -> bool:
-    # Best-effort: before first save, `pk` is None in Tortoise
-    try:
-        pk = instance.pk
-        return pk is None
-    except Exception:
-        return False
+    return getattr(instance, "pk", None) is None
 
 
 def _patch_tortoise_model_methods() -> None:
@@ -131,18 +112,14 @@ def _patch_tortoise_model_methods() -> None:
 
     async def _fd_save(self: Any, *args: Any, **kwargs: Any) -> None:
         created = _is_created(self)
-        with suppress(Exception):
-            await pre_save.send(sender=self.__class__, instance=self, created=created)
+        await pre_save.send(sender=self.__class__, instance=self, created=created)
         await orig_save(self, *args, **kwargs)
-        with suppress(Exception):
-            await post_save.send(sender=self.__class__, instance=self, created=created)
+        await post_save.send(sender=self.__class__, instance=self, created=created)
 
     async def _fd_delete(self: Any, *args: Any, **kwargs: Any) -> None:
-        with suppress(Exception):
-            await pre_delete.send(sender=self.__class__, instance=self)
+        await pre_delete.send(sender=self.__class__, instance=self)
         await orig_delete(self, *args, **kwargs)
-        with suppress(Exception):
-            await post_delete.send(sender=self.__class__, instance=self)
+        await post_delete.send(sender=self.__class__, instance=self)
 
     cast(Any, _fd_save).__fast_django_patched__ = True
     cast(Any, _fd_delete).__fast_django_patched__ = True
@@ -150,7 +127,6 @@ def _patch_tortoise_model_methods() -> None:
     cast(Any, Model).delete = _fd_delete
 
 
-# Apply the ORM patches eagerly so signals work even without FastAPI app
 _patch_tortoise_model_methods()
 
 

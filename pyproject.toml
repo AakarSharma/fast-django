@@ -36,7 +36,7 @@ dependencies = [
   "pydantic-settings>=2.2.1",
   "python-multipart>=0.0.9",
   "email-validator>=2.1.0",
-  "passlib[bcrypt]>=1.7.4",
+  "passlib>=1.7.4",
 ]
 
 [project.optional-dependencies]
@@ -53,6 +53,7 @@ dev = [
   "pre-commit>=3.7",
   "types-PyYAML",
   "ipython",
+  "twine>=5.1",
 ]
 docs = [
   "mkdocs>=1.6",

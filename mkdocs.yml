@@ -30,6 +30,7 @@ nav:
     - Routing: routing.md
     - ORM: orm.md
     - Settings: settings.md
+    - Authentication: authentication.md
     - Middleware: middleware.md
     - Admin: admin.md
     - Signals: signals.md
@@ -37,6 +38,7 @@ nav:
     - CLI: cli.md
     - Scaffolding: scaffolding.md
     - Migrations: migrations.md
+    - Releasing: releasing.md
   - Examples: examples.md
   - API Reference:
     - Core API: api/core.md
